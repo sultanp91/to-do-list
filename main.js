@@ -1,1 +1,1 @@
-alert("working!");
+(()=>{"use strict";alert("linked!")})();
