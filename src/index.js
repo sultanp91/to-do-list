@@ -1,1 +1,3 @@
-alert("working!");
+import {ToDo} from './toDoClass';
+
+alert("linked!")
