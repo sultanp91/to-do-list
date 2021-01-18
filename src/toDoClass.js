@@ -3,7 +3,8 @@ class ToDo {
         this.title = title,
         this.description =  description,
         this.dueDate = dueDate,
-        this.priority = priority
+        this.priority = priority,
+        this.completion = false;
     }
 
 set updateTitle(title){
@@ -11,15 +12,15 @@ set updateTitle(title){
 }
 
 set updateDescription(description){
-    this.description = description;
+        this.description = description;
 }
 
 set updateDueDate(dueDate){
-    this.dueDate = dueDate;
+        this.dueDate = dueDate;
 }
 
 set updatePriority(priority){
-    this.priority = priority;
+        this.priority = priority;
 }
 
 }
