@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
-    <script type="module" src="./main.js"></script>
+    <script defer type="module" src="./main.js"></script>
     
 </head>
 <body>
@@ -14,16 +14,17 @@
         <button>Add new project</button>
     </form>
 
-    <form action="submit">
+    <form id="todoform">
     
     <input type="text" name="title" id="todotitle">
-    <input type="text" name="description" id="todescription">
+    <input type="text" name="description" id="tododescription">
     <input type="date" name="date" id="tododate">
     <select name="priority" id="todopriority">
         <option value="low">Low</option>
         <option value="medium">Medium</option>
         <option value="high">High</option>
     </select>
+    <input type="submit" value="submit" id="addtodo">
     
     </form>
 </body>
