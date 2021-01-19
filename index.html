@@ -9,12 +9,18 @@
 </head>
 <body>
     <h1>to do list</h1>
-    <form action="submit">
-        <input type="text" name="name" id="">
-        <button>Add new project</button>
+    <form id="projectform">
+        <input type="text" name="name" id="projectname">
+        <input type="submit" id="addproject">
     </form>
 
     <form id="todoform">
+
+    <select name="project" id="projectchoice">
+        <option value="0">Coding</option>
+        <option value="1">Work</option>
+        <option value="2">Gym</option>
+    </select>
     
     <input type="text" name="title" id="todotitle">
     <input type="text" name="description" id="tododescription">
