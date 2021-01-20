@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
-    <script defer type="module" src="./main.js"></script>
+    <script defer type="module" src="../src/index.js"></script>
     
 </head>
 <body>
@@ -31,5 +31,15 @@
     <input type="submit" value="submit" id="addtodo">
     
     </form>
+
+    <div class="todocontainer">
+        <div id="loadproject">
+            <select name="chooseproject" id="projects">
+                <option value="0">Default</option>
+            </select>
+        </div>
+        <table id="lists"></table>
+        
+    </div>
 </body>
 </html>
