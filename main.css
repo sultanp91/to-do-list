@@ -55,7 +55,8 @@ main {
 }
 
 .sidebar {
-  width: 30rem;
+  height: 100%;
+  width: 35rem;
   background-color: #fafafa;
   font-size: 2rem;
   display: -webkit-box;
@@ -65,16 +66,25 @@ main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  position: fixed;
+  left: 0rem;
+  -webkit-transition: all 0.6s linear;
+  transition: all 0.6s linear;
 }
 
 .sidebar h3 {
   text-align: center;
+  padding: 1rem 0;
 }
 
 .sidebar input {
   margin: 0 auto;
   display: block;
   width: 80%;
+}
+
+.sidebar-hidden {
+  left: -35rem;
 }
 
 .todocontainer {
@@ -84,7 +94,6 @@ main {
 table {
   width: 80%;
   height: 100%;
-  background-color: lawngreen;
 }
 
 table td {
