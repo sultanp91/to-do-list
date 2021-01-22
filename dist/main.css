@@ -1,0 +1,93 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+}
+
+main {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+}
+
+nav {
+  background-color: #db4c3f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 4.5rem;
+}
+
+nav h1 {
+  text-align: center;
+  width: 100%;
+  color: #202020;
+  font-size: 3rem;
+  padding-top: 0.5rem;
+}
+
+nav img {
+  margin-left: 1rem;
+  padding: 0 0.5rem;
+  border-radius: 3px;
+  fill: #fff;
+}
+
+nav img:hover {
+  background-color: #e3746a;
+  cursor: pointer;
+}
+
+main {
+  background-color: #ffffff;
+}
+
+.sidebar {
+  width: 30rem;
+  background-color: #fafafa;
+  font-size: 2rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.sidebar h3 {
+  text-align: center;
+}
+
+.sidebar input {
+  margin: 0 auto;
+  display: block;
+  width: 80%;
+}
+
+.todocontainer {
+  width: 100%;
+}
+
+table {
+  width: 80%;
+  height: 100%;
+  background-color: lawngreen;
+}
+
+table td {
+  vertical-align: baseline;
+}
+/*# sourceMappingURL=main.css.map */

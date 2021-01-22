@@ -71,14 +71,19 @@ const updateTodoList = () => {
     lists.textContent = ""
     for(let i = 0; i < myProjects[projectIndex][1].length; i++){
         let todo = document.createElement("tr");
-        todo.textContent = 
-        `<td>${myProjects[projectIndex][1][i].title}</td>
+        todo.innerHTML = 
+        `<td data-index="${i}">${myProjects[projectIndex][1][i].title}</td>
+        <td data-index="${i}">${myProjects[projectIndex][1][i].description}</td>
+        <td data-index="${i}">${myProjects[projectIndex][1][i].dueDate}</td>
+        <td data-index="${i}">${myProjects[projectIndex][1][i].priority}</td>
+        <td data-index="${i}">${myProjects[projectIndex][1][i].completion}</td>
         `
         lists.append(todo);
     }
 }
 
 addTodo.addEventListener("click", (e) => {
+    
     e.preventDefault();
     let projectIndex = projectChoice.value;
     let newtodo = new ToDo(toDoTitle.value, toDoDescription.value, toDoDate.value, toDoPriority.value);
@@ -99,3 +104,4 @@ addProject.addEventListener("click", (e) => {
 })
 
 chooseProjects.addEventListener("change", updateTodoList);
+
