@@ -11,7 +11,7 @@
 <body>
 
     <nav>
-        <img src="./img/menu-24px.svg" alt="menu"> 
+        <img src="./img/menu-24px.svg" id="hamburger" alt="menu"> 
         <h1>To Do List</h1>
     </nav>
 
@@ -23,15 +23,16 @@
             <input type="text" name="name" id="projectname">
             <button id="addproject">Submit</button>
         </form>
+
+        <h3>New ToDo</h3>
     
         <form id="todoform">
-    
+
         <select name="project" id="projectchoice">
-            <option value="0">Default</option>
+        <option value="0">Default</option>
         </select>
-        
-        <input type="text" name="title" id="todotitle">
-        <input type="text" name="description" id="tododescription">
+        <input type="text" placeholder="Title" name="title" id="todotitle">
+        <input type="text" placeholder="Description" name="description" id="tododescription">
         <input type="date" name="date" id="tododate">
         <select name="priority" id="todopriority">
             <option value="low">Low</option>

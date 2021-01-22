@@ -58,19 +58,30 @@ main {
 }
 
 .sidebar {
-    width: 30rem;
+    height: 100%;
+    width: 35rem;
     background-color: $side-menu-color;
     font-size: 2rem;
     display: flex;
     flex-direction: column;
+    position: fixed;
+    left: 0rem;
+    transition: all 0.6s linear;
+
+
     h3 {
         text-align: center;
+        padding: 1rem 0;
     }
     input {
         margin: 0 auto;
         display: block;
         width: 80%;
     }
+}
+
+.sidebar-hidden {
+    left: -35rem;
 }
 
 .todocontainer {
@@ -80,7 +91,6 @@ main {
 table {
     width: 80%;
     height: 100%;
-    background-color: lawngreen;
     td {
         vertical-align: baseline;
     }

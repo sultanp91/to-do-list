@@ -28,7 +28,8 @@ set updatePriority(priority){
 
 }
 
-
+const hamburger = document.querySelector("#hamburger");
+const sidebar = document.querySelector(".sidebar");
 const addTodo = document.querySelector("#addtodo");
 const toDoTitle = document.querySelector("#todotitle");
 const toDoDescription = document.querySelector("#tododescription")
@@ -83,7 +84,7 @@ const updateTodoList = () => {
 }
 
 addTodo.addEventListener("click", (e) => {
-    
+
     e.preventDefault();
     let projectIndex = projectChoice.value;
     let newtodo = new ToDo(toDoTitle.value, toDoDescription.value, toDoDate.value, toDoPriority.value);
@@ -105,3 +106,6 @@ addProject.addEventListener("click", (e) => {
 
 chooseProjects.addEventListener("change", updateTodoList);
 
+hamburger.addEventListener("click", () => {
+    sidebar.classList.toggle("sidebar-hidden");
+})
