@@ -5,41 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To Do List</title>
     <script defer type="module" src="../src/index.js"></script>
+    <link rel="stylesheet" href="./main.css">
     
 </head>
 <body>
-    <h1>to do list</h1>
-    <form id="projectform">
-        <input type="text" name="name" id="projectname">
-        <button id="addproject">Submit</button>
-    </form>
 
-    <form id="todoform">
+    <nav>
+        <img src="./img/menu-24px.svg" alt="menu"> 
+        <h1>To Do List</h1>
+    </nav>
 
-    <select name="project" id="projectchoice">
-        <option value="0">Default</option>
-    </select>
+    <main>
+
+    <div class="sidebar">
+        <h3>Projects</h3>
+        <form id="projectform">
+            <input type="text" name="name" id="projectname">
+            <button id="addproject">Submit</button>
+        </form>
     
-    <input type="text" name="title" id="todotitle">
-    <input type="text" name="description" id="tododescription">
-    <input type="date" name="date" id="tododate">
-    <select name="priority" id="todopriority">
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-    </select>
-    <input type="submit" value="submit" id="addtodo">
+        <form id="todoform">
     
-    </form>
+        <select name="project" id="projectchoice">
+            <option value="0">Default</option>
+        </select>
+        
+        <input type="text" name="title" id="todotitle">
+        <input type="text" name="description" id="tododescription">
+        <input type="date" name="date" id="tododate">
+        <select name="priority" id="todopriority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+        <input type="submit" value="submit" id="addtodo">
+        
+        </form>
 
-    <div class="todocontainer">
+        <h3>Load Project</h3>
         <div id="loadproject">
             <select name="chooseproject" id="projects">
                 <option value="0">Default</option>
             </select>
         </div>
-        <table id="lists"></table>
-        
     </div>
+    
+        <table id="lists"></table>
+    
+        
+
+    </main>
 </body>
 </html>
