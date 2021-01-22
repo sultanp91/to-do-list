@@ -108,4 +108,5 @@ chooseProjects.addEventListener("change", updateTodoList);
 
 hamburger.addEventListener("click", () => {
     sidebar.classList.toggle("sidebar-hidden");
+    lists.classList.toggle("table-adjust");
 })
