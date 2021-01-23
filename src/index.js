@@ -30,6 +30,7 @@ set updatePriority(priority){
 
 const hamburger = document.querySelector("#hamburger");
 const sidebar = document.querySelector(".sidebar");
+const plusSign = document.querySelector("#plussign")
 const addTodo = document.querySelector("#addtodo");
 const toDoTitle = document.querySelector("#todotitle");
 const toDoDescription = document.querySelector("#tododescription")
@@ -93,6 +94,8 @@ addTodo.addEventListener("click", (e) => {
     toDoForm.reset();
     console.log(myProjects);
     updateTodoList();
+    document.querySelector(".modal").classList.toggle("modal-active");
+
 })
 
 
@@ -109,4 +112,8 @@ chooseProjects.addEventListener("change", updateTodoList);
 hamburger.addEventListener("click", () => {
     sidebar.classList.toggle("sidebar-hidden");
     lists.classList.toggle("table-adjust");
+})
+
+plusSign.addEventListener("click", () => {
+    document.querySelector(".modal").classList.toggle("modal-active");
 })
