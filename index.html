@@ -36,7 +36,16 @@
         </div>
     </div>
     
-        <table id="lists"></table>
+        <section class="todocontainer" id="lists">
+            
+            <div class="tododiv">
+                <h3 class="todo-title">Finish to do list</h3>
+                <p class=todo-description>Clean up code and make todo list feature complete</p>
+                <p class="todo-duedate">25/01/2020</p>
+                <p class="todo-priority">High</p>
+            </div>
+
+        </section>
     
         <div class="modal">
                             
@@ -62,7 +71,7 @@
                     </li>
                     <li>
                         
-                        <input type="text" placeholder="description" name="description" id="tododescription">
+                        <input type="text" placeholder="Description" name="description" id="tododescription">
                     </li>
                     <li>   <label for="date">Date:  </label></li>
                     <li>
@@ -77,10 +86,12 @@
                         </select>
                     </li>
                     <li>   
-                        <input type="submit" value="submit" id="addtodo">
+
+                        <button id="addtodo">Submit</button>
+
                     </li>
                     <li>
-                        <button id="closeform">Close Form</button>
+                        <button id="closeform">Close</button>
                     </li>
 
                 </ul>
