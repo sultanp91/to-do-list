@@ -16,7 +16,7 @@
     <nav>
         <i class="material-icons" id="hamburger" alt="menu">menu</i>
         <h1>To Do List</h1>
-        <i class="material-icons"></i>
+        <i class="material-icons" id="plussign">add</i>
     </nav>
 
     <main>
@@ -24,28 +24,9 @@
     <div class="sidebar">
         <h3>Projects</h3>
         <form id="projectform">
-            <input type="text" name="name" id="projectname">
+            <input type="text" placeholder="Add New Project..."name="name" id="projectname">
             <button id="addproject">Submit</button>
-        </form>
-
-        <h3>New ToDo</h3>
-    
-        <form id="todoform">
-
-        <select name="project" id="projectchoice">
-        <option value="0">Default</option>
-        </select>
-        <input type="text" placeholder="Title" name="title" id="todotitle">
-        <input type="text" placeholder="Description" name="description" id="tododescription">
-        <input type="date" name="date" id="tododate">
-        <select name="priority" id="todopriority">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-        </select>
-        <input type="submit" value="submit" id="addtodo">
-        
-        </form>
+        </form>       
 
         <h3>Load Project</h3>
         <div id="loadproject">
@@ -57,8 +38,56 @@
     
         <table id="lists"></table>
     
-        
+        <div class="modal">
+                            
+                            <h3>New ToDo</h3>
+                    
+                            <form id="todoform">
+                <ul>
+                    <li>
+                        <label for="project">Project:</label>
+                    </li>
+                    <li>
+                        <select name="project" id="projectchoice">
+                        <option value="0">Default</option>
+                        </select>
+                    </li>
 
+                    <li><label for="title">Title:</label></li>
+                    <li> 
+                            <input type="text" placeholder="Title" name="title" id="todotitle">
+                    </li>
+                    <li>
+                        <label for="description">Description: </label>
+                    </li>
+                    <li>
+                        
+                        <input type="text" placeholder="description" name="description" id="tododescription">
+                    </li>
+                    <li>   <label for="date">Date:  </label></li>
+                    <li>
+                        <input type="date" name="date" id="tododate">
+                    </li>
+                    <li><label for="priority">Priority:  </label></li>
+                    <li>
+                        <select name="priority" id="todopriority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </li>
+                    <li>   
+                        <input type="submit" value="submit" id="addtodo">
+                    </li>
+                    <li>
+                        <button id="closeform">Close Form</button>
+                    </li>
+
+                </ul>
+
+                            
+                            </form>
+        </div>
     </main>
 </body>
 </html>

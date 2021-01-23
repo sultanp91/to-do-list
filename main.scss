@@ -17,6 +17,7 @@ body {
 main {
     display: flex;
     height: 100%;
+    position: relative;
    
 }
 
@@ -24,38 +25,51 @@ main {
 $header-color: #db4c3f;
 $main-body-color: #ffffff;
 $side-menu-color: #fafafa;
+
 $text-color: #202020;
 
 nav {
     background-color: $header-color;
     display: flex;
-    height: 4.5rem;
+    align-items: center;
+    height: 5rem;
 
     h1{
         text-align: center;
         width: 100%;
-        color: $text-color;
+        color: #fff;
         font-size: 3rem;
-        padding-top: 0.5rem;
     }
 
     #hamburger {
-        margin-left: 1rem;
-        padding: 0 0.5rem;
-        border-radius: 3px;
-        font-size: 4.5rem;
+        margin-left: 2rem;
+        padding: 0.5rem;
+        border-radius: 5px;
+        font-size: 4rem;
         color: #fff;
 
         &:hover{
             background-color: lighten($header-color, 10);
             cursor: pointer;
         }
+        
+    }
+
+    #plussign {
+        margin-right: 2rem;
+        padding: 0.5rem;
+        border-radius: 5px;
+        font-size: 4rem;
+        color: #fff;
+
+        &:hover{
+            background-color: lighten($header-color, 10);
+            cursor: pointer;
+        }
+
     }
     
-}
 
-main {
-    background-color: $main-body-color;
 }
 
 .sidebar {
@@ -98,4 +112,50 @@ table {
     td {
         vertical-align: baseline;
     }
+}
+
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: solid 1px black;
+    border-radius: 1.5rem;
+    background-color: darken($side-menu-color, 15);
+    height: 65%;
+    width: 35rem;
+    visibility: hidden;
+
+    ul{
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        li {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            padding: 0 2rem;
+            }
+    }
+    
+    h3 {
+        font-size: 3rem;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    label{
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    input, select{
+        width: 100%;
+        padding: 1rem;
+        margin: 0.5rem 0;
+    }
+
+}
+
+.modal-active {
+    visibility: visible;
 }
