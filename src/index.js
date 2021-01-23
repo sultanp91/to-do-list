@@ -37,6 +37,7 @@ const toDoDescription = document.querySelector("#tododescription")
 const toDoDate = document.querySelector("#tododate")
 const toDoPriority = document.querySelector("#todopriority")
 const toDoForm =  document.querySelector("#todoform")
+const closeForm = document.querySelector("#closeform")
 
 const projectName = document.querySelector("#projectname")
 const addProject = document.querySelector("#addproject");
@@ -72,13 +73,15 @@ const updateTodoList = () => {
     let projectIndex = chooseProjects.value
     lists.textContent = ""
     for(let i = 0; i < myProjects[projectIndex][1].length; i++){
-        let todo = document.createElement("tr");
+        let todo = document.createElement("div");
+        todo.setAttribute("class", "tododiv")
+
         todo.innerHTML = 
-        `<td data-index="${i}">${myProjects[projectIndex][1][i].title}</td>
-        <td data-index="${i}">${myProjects[projectIndex][1][i].description}</td>
-        <td data-index="${i}">${myProjects[projectIndex][1][i].dueDate}</td>
-        <td data-index="${i}">${myProjects[projectIndex][1][i].priority}</td>
-        <td data-index="${i}">${myProjects[projectIndex][1][i].completion}</td>
+        `<h3 class="todo-title" data-index="${i}">${myProjects[projectIndex][1][i].title}</h3>
+        <p class="todo-description" data-index="${i}">${myProjects[projectIndex][1][i].description}</p>
+        <p class="todo-duedate" index="${i}">${myProjects[projectIndex][1][i].dueDate}</p>
+        <p class="todo-priority" data-index="${i}">${myProjects[projectIndex][1][i].priority}</p>
+        <button data-input="delete" data-index="${i}">Delete</button> 
         `
         lists.append(todo);
     }
@@ -111,9 +114,29 @@ chooseProjects.addEventListener("change", updateTodoList);
 
 hamburger.addEventListener("click", () => {
     sidebar.classList.toggle("sidebar-hidden");
-    lists.classList.toggle("table-adjust");
+    lists.classList.toggle("todomargin");
+    lists.classList.toggle("todo-adjust");
 })
 
 plusSign.addEventListener("click", () => {
     document.querySelector(".modal").classList.toggle("modal-active");
+})
+
+
+closeForm.addEventListener("click", (e) => {
+    e.preventDefault()
+    document.querySelector(".modal").classList.toggle("modal-active");
+})
+
+lists.addEventListener("click", (e) => {
+    e.preventDefault();
+    if(e.target.dataset.input === "delete"){
+        let projectIndex = chooseProjects.value;
+        let todoIndex = e.target.dataset.index;
+        console.log(todoIndex)
+        myProjects[projectIndex][1].splice(todoIndex, 1)
+    }
+    updateTodoList();
+
+
 })
