@@ -79,8 +79,8 @@ nav #plussign:hover {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-transition: all 0.6s linear;
-  transition: all 0.6s linear;
+  -webkit-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
   position: fixed;
   left: 0;
 }
@@ -108,8 +108,8 @@ section {
   margin-left: 35rem;
   width: 100%;
   height: 100%;
-  -webkit-transition: all 0.6s linear;
-  transition: all 0.6s linear;
+  -webkit-transition: all 0.4s ease-out;
+  transition: all 0.4s ease-out;
 }
 
 .modal {
@@ -201,7 +201,7 @@ section {
 
 .tododiv {
   width: 80%;
-  height: 10rem;
+  height: 13rem;
   background-color: green;
   margin: 2rem auto;
   padding: 1rem;

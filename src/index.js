@@ -28,6 +28,8 @@ set updatePriority(priority){
 
 }
 
+//DOM elements
+
 const hamburger = document.querySelector("#hamburger");
 const sidebar = document.querySelector(".sidebar");
 const plusSign = document.querySelector("#plussign")
@@ -70,8 +72,11 @@ const updateProjects = () => {
 
 const updateTodoList = () => {
 
-    let projectIndex = chooseProjects.value
-    lists.textContent = ""
+    
+    let projectIndex = chooseProjects.value;
+
+    lists.innerHTML = ""
+
     for(let i = 0; i < myProjects[projectIndex][1].length; i++){
         let todo = document.createElement("div");
         todo.setAttribute("class", "tododiv")
@@ -79,11 +84,25 @@ const updateTodoList = () => {
         todo.innerHTML = 
         `<h3 class="todo-title" data-index="${i}">${myProjects[projectIndex][1][i].title}</h3>
         <p class="todo-description" data-index="${i}">${myProjects[projectIndex][1][i].description}</p>
-        <p class="todo-duedate" index="${i}">${myProjects[projectIndex][1][i].dueDate}</p>
-        <p class="todo-priority" data-index="${i}">${myProjects[projectIndex][1][i].priority}</p>
+        <p class="todo-duedate" data-input="update" index="${i}">${myProjects[projectIndex][1][i].dueDate}</p>
+        <p class="todo-priority" data-index="${i}">Priority: ${myProjects[projectIndex][1][i].priority}</p>
         <button data-input="delete" data-index="${i}">Delete</button> 
+        <br>
+        <button data-input="edit" data-index="${i}">Edit</button>
+        <input id=${i} name="updatetitle" type="text" class="updatetitle" placeholder="Update title" data-index="${i}">
+        <input name="updatedescription" type="text" class="updatedescription" placeholder="Update Description" data-index="${i}">
+        <input name="updateduedate" type="date" class="updateduedate" data-index="${i}">
+        <select name="updatepriority" class="updatepriority" data-index="${i}">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
+
+        <button data-input="submit" data-index="${i}">submit</button>
         `
-        lists.append(todo);
+        lists.appendChild(todo);
+
+        
     }
 }
 
@@ -95,7 +114,6 @@ addTodo.addEventListener("click", (e) => {
 
     myProjects[projectIndex][1].push(newtodo);
     toDoForm.reset();
-    console.log(myProjects);
     updateTodoList();
     document.querySelector(".modal").classList.toggle("modal-active");
 
@@ -106,7 +124,6 @@ addProject.addEventListener("click", (e) => {
     e.preventDefault();
     myProjects.push([projectName.value, []]);
     projectForm.reset();
-    console.log(myProjects);
     updateProjects();
 })
 
@@ -128,15 +145,26 @@ closeForm.addEventListener("click", (e) => {
     document.querySelector(".modal").classList.toggle("modal-active");
 })
 
+
+
 lists.addEventListener("click", (e) => {
-    e.preventDefault();
+
+    let projectIndex = chooseProjects.value;
+    let todoIndex = e.target.dataset.index;
+    let todoParent = e.target.parentElement;
+
     if(e.target.dataset.input === "delete"){
-        let projectIndex = chooseProjects.value;
-        let todoIndex = e.target.dataset.index;
-        console.log(todoIndex)
         myProjects[projectIndex][1].splice(todoIndex, 1)
+        updateTodoList();
+    } else if(e.target.dataset.input === "submit"){
+        
+        myProjects[0][1][todoIndex].updateTitle = todoParent.querySelector(".updatetitle").value;
+        myProjects[0][1][todoIndex].updateDescription = todoParent.querySelector(".updatedescription").value;
+        myProjects[0][1][todoIndex].updateDueDate = todoParent.querySelector(".updateduedate").value;
+        myProjects[0][1][todoIndex].updatePriority = todoParent.querySelector(".updatepriority").value;
+        updateTodoList();
     }
-    updateTodoList();
-
-
+    
 })
+
+
