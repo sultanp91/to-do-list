@@ -177,10 +177,40 @@ lists.addEventListener("click", (e) => {
 
 allToDo.addEventListener("click", () => {
     
-    let allTodoItems = []
+        lists.innerHTML = "";
+    
+    
+        for(let i = 0; i < myProjects.length; i++){
+        for(let j = 0; j < myProjects[i][1].length; j++){
+            
+            let projectIndex = i;
 
+            let todo = document.createElement("div");
+        todo.setAttribute("class", "tododiv")
 
+        todo.innerHTML = 
+        `<h3 class="todo-title" data-index="${j}">${myProjects[projectIndex][1][j].title}</h3>
+        <p class="todo-description" data-index="${j}">${myProjects[projectIndex][1][j].description}</p>
+        <p class="todo-duedate" data-input="update" index="${j}">${myProjects[projectIndex][1][j].dueDate}</p>
+        <p class="todo-priority" data-index="${j}">Priority: ${myProjects[projectIndex][1][j].priority}</p>
+        <button data-input="delete" data-index="${j}">Delete</button> 
+        <br>
+        <button data-input="edit" data-project=${projectIndex} data-index="${j}">Edit</button>
+        <input data-project=${projectIndex} type="text" class="updatetitle" placeholder="Update title" data-index="${j}">
+        <input data-project=${projectIndex}  type="text" class="updatedescription" placeholder="Update Description" data-index="${i}">
+        <input data-project=${projectIndex} type="date" class="updateduedate" data-index="${j}">
+        <select data-project=${projectIndex}  class="updatepriority" data-index="${j}">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+        </select>
 
+        <button data-input="submit" data-project=${projectIndex} data-index="${j}">submit</button>
+        `
+        lists.appendChild(todo);
+
+        }
+    }
 
 
 })
