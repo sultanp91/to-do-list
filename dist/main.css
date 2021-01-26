@@ -96,6 +96,18 @@ nav #plussign:hover {
   width: 80%;
 }
 
+.sidebar select {
+  width: 80%;
+  background-color: cornflowerblue;
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  display: block;
+  margin: 0 auto;
+  padding: 2.5rem 0;
+  cursor: pointer;
+}
+
 .sidebar-hidden {
   left: -35rem;
 }
@@ -121,7 +133,7 @@ section {
   border: solid 1px black;
   border-radius: 1.5rem;
   background-color: #ededed;
-  height: 60%;
+  height: 50rem;
   width: 35rem;
   visibility: hidden;
 }
