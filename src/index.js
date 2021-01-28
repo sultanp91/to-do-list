@@ -1,13 +1,11 @@
-// import {ToDo} from './toDoClass';
-// import {updateProjects} from './addProjects';
-
+// import { ToDo } from './toDoClass';
 class ToDo {
   constructor(title, description, dueDate, priority) {
-    this.title = title,
-    this.description = description,
-    this.dueDate = dueDate,
-    this.priority = priority,
-    this.completion = false;
+    (this.title = title),
+    (this.description = description),
+    (this.dueDate = dueDate),
+    (this.priority = priority),
+    (this.completion = false);
   }
 
   set updateTitle(title) {
@@ -26,6 +24,9 @@ class ToDo {
     this.priority = priority;
   }
 }
+
+// import { createTodo } from './createTodo';
+// import {updateProjects} from './addProjects';
 
 // DOM elements
 
@@ -52,7 +53,6 @@ const projectChoice = document.querySelector('#projectchoice');
 // To Do Container
 const lists = document.querySelector('#lists');
 
-
 // Array for all projects
 
 // let myProjects = [["Default", []]];
@@ -67,7 +67,7 @@ if (!localStorage.getItem('savedProjects')) {
   localStorage.setItem('savedProjects', savedProjects);
 }
 
-const myProjects = (JSON.parse(localStorage.savedProjects));
+const myProjects = JSON.parse(localStorage.savedProjects);
 
 const localSave = () => {
   localStorage.setItem('savedProjects', JSON.stringify(myProjects));
@@ -94,6 +94,32 @@ const updateProjects = () => {
 
 updateProjects();
 
+// Function creates individual todo items
+
+const createTodo = (projectIndex, arrayIndex) => {
+  const todo = document.createElement('div');
+  todo.setAttribute('class', 'tododiv');
+
+  todo.innerHTML = `<h3 class="todo-title" data-index="${arrayIndex}">${myProjects[projectIndex][1][arrayIndex].title}</h3>
+  <p class="todo-description" data-index="${arrayIndex}">${myProjects[projectIndex][1][arrayIndex].description}</p>
+  <p class="todo-duedate" data-input="update" index="${arrayIndex}">${myProjects[projectIndex][1][arrayIndex].dueDate}</p>
+  <p class="todo-priority" data-index="${arrayIndex}">Priority: ${myProjects[projectIndex][1][arrayIndex].priority}</p>
+  <button data-input="delete" data-project=${projectIndex} data-index="${arrayIndex}">Delete</button> 
+  <br>
+  <button data-input="edit" data-project=${projectIndex} data-index="${arrayIndex}">Edit</button>
+  <input data-project=${projectIndex} type="text" class="updatetitle" placeholder="Update title" data-index="${arrayIndex}">
+  <input data-project=${projectIndex}  type="text" class="updatedescription" placeholder="Update Description" data-index="${arrayIndex}">
+  <input data-project=${projectIndex} type="date" class="updateduedate" data-index="${arrayIndex}">
+  <select data-project=${projectIndex}  class="updatepriority" data-index="${arrayIndex}">
+      <option value="low">Low</option>
+      <option value="medium">Medium</option>
+      <option value="high">High</option>
+  </select>
+
+  <button data-input="submit" data-project=${projectIndex} data-index="${arrayIndex}">submit</button>`;
+  lists.appendChild(todo);
+};
+
 // Updates the ToDo container with ToDos from selected projects
 
 const updateTodoList = () => {
@@ -102,37 +128,31 @@ const updateTodoList = () => {
   lists.innerHTML = '';
 
   for (let i = 0; i < myProjects[projectIndex][1].length; i++) {
-    const todo = document.createElement('div');
-    todo.setAttribute('class', 'tododiv');
-
-    todo.innerHTML = `<h3 class="todo-title" data-index="${i}">${myProjects[projectIndex][1][i].title}</h3>
-        <p class="todo-description" data-index="${i}">${myProjects[projectIndex][1][i].description}</p>
-        <p class="todo-duedate" data-input="update" index="${i}">${myProjects[projectIndex][1][i].dueDate}</p>
-        <p class="todo-priority" data-index="${i}">Priority: ${myProjects[projectIndex][1][i].priority}</p>
-        <button data-input="delete" data-project=${projectIndex} data-index="${i}">Delete</button> 
-        <br>
-        <button data-input="edit" data-project=${projectIndex} data-index="${i}">Edit</button>
-        <input data-project=${projectIndex} type="text" class="updatetitle" placeholder="Update title" data-index="${i}">
-        <input data-project=${projectIndex}  type="text" class="updatedescription" placeholder="Update Description" data-index="${i}">
-        <input data-project=${projectIndex} type="date" class="updateduedate" data-index="${i}">
-        <select data-project=${projectIndex}  class="updatepriority" data-index="${i}">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-        </select>
-
-        <button data-input="submit" data-project=${projectIndex} data-index="${i}">submit</button>
-        `;
-    lists.appendChild(todo);
+    createTodo(projectIndex, i);
   }
 };
 
-updateTodoList();
+const loadAllToDos = () => {
+  lists.innerHTML = '';
+
+  for (let i = 0; i < myProjects.length; i++) {
+    for (let j = 0; j < myProjects[i][1].length; j++) {
+      createTodo(i, j);
+    }
+  }
+}
+
+loadAllToDos();
 
 addTodo.addEventListener('click', (e) => {
   e.preventDefault();
   const projectIndex = projectChoice.value;
-  const newtodo = new ToDo(toDoTitle.value, toDoDescription.value, toDoDate.value, toDoPriority.value);
+  const newtodo = new ToDo(
+    toDoTitle.value,
+    toDoDescription.value,
+    toDoDate.value,
+    toDoPriority.value,
+  );
 
   myProjects[projectIndex][1].push(newtodo);
   toDoForm.reset();
@@ -178,79 +198,36 @@ lists.addEventListener('click', (e) => {
     updateTodoList();
     localSave();
   } else if (e.target.dataset.input === 'submit') {
-    myProjects[projectIndex][1][todoIndex].updateTitle = todoParent.querySelector('.updatetitle').value;
-    myProjects[projectIndex][1][todoIndex].updateDescription = todoParent.querySelector('.updatedescription').value;
-    myProjects[projectIndex][1][todoIndex].updateDueDate = todoParent.querySelector('.updateduedate').value;
-    myProjects[projectIndex][1][todoIndex].updatePriority = todoParent.querySelector('.updatepriority').value;
+    myProjects[projectIndex][1][
+      todoIndex
+    ].updateTitle = todoParent.querySelector('.updatetitle').value;
+    myProjects[projectIndex][1][
+      todoIndex
+    ].updateDescription = todoParent.querySelector('.updatedescription').value;
+    myProjects[projectIndex][1][
+      todoIndex
+    ].updateDueDate = todoParent.querySelector('.updateduedate').value;
+    myProjects[projectIndex][1][
+      todoIndex
+    ].updatePriority = todoParent.querySelector('.updatepriority').value;
     updateTodoList();
     localSave();
   }
 });
 
+
 allToDo.addEventListener('click', () => {
-  lists.innerHTML = '';
-
-  for (let i = 0; i < myProjects.length; i++) {
-    for (let j = 0; j < myProjects[i][1].length; j++) {
-      const projectIndex = i;
-
-      const todo = document.createElement('div');
-      todo.setAttribute('class', 'tododiv');
-
-      todo.innerHTML = `<h3 class="todo-title" data-index="${j}">${myProjects[projectIndex][1][j].title}</h3>
-        <p class="todo-description" data-index="${j}">${myProjects[projectIndex][1][j].description}</p>
-        <p class="todo-duedate" data-input="update" index="${j}">${myProjects[projectIndex][1][j].dueDate}</p>
-        <p class="todo-priority" data-index="${j}">Priority: ${myProjects[projectIndex][1][j].priority}</p>
-        <button data-input="delete" data-project=${projectIndex} data-index="${j}">Delete</button> 
-        <br>
-        <button data-input="edit" data-project=${projectIndex} data-index="${j}">Edit</button>
-        <input data-project=${projectIndex} type="text" class="updatetitle" placeholder="Update title" data-index="${j}">
-        <input data-project=${projectIndex}  type="text" class="updatedescription" placeholder="Update Description" data-index="${i}">
-        <input data-project=${projectIndex} type="date" class="updateduedate" data-index="${j}">
-        <select data-project=${projectIndex}  class="updatepriority" data-index="${j}">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-        </select>
-
-        <button data-input="submit" data-project=${projectIndex} data-index="${j}">submit</button>
-        `;
-      lists.appendChild(todo);
-    }
-  }
+  loadAllToDos();
 });
 
 selectPriority.addEventListener('change', () => {
   const projectPriority = selectPriority.value;
-
   lists.innerHTML = '';
 
-  for (let j = 0; j < myProjects.length; j++) {
-    for (let i = 0; myProjects[j][1].length; i++) {
-      const projectIndex = j;
+  for (let i = 0; i < myProjects.length; i++) {
+    for (let j = 0; myProjects[i][1].length; j++) {
       if (myProjects[j][1][i].priority === projectPriority) {
-        const todo = document.createElement('div');
-        todo.setAttribute('class', 'tododiv');
-
-        todo.innerHTML = `<h3 class="todo-title" data-index="${i}">${myProjects[projectIndex][1][i].title}</h3>
-        <p class="todo-description" data-index="${i}">${myProjects[projectIndex][1][i].description}</p>
-        <p class="todo-duedate" data-input="update" index="${i}">${myProjects[projectIndex][1][i].dueDate}</p>
-        <p class="todo-priority" data-index="${i}">Priority: ${myProjects[projectIndex][1][i].priority}</p>
-        <button data-input="delete" data-project=${projectIndex} data-index="${i}">Delete</button> 
-        <br>
-        <button data-input="edit" data-project=${projectIndex} data-index="${i}">Edit</button>
-        <input data-project=${projectIndex} type="text" class="updatetitle" placeholder="Update title" data-index="${i}">
-        <input data-project=${projectIndex}  type="text" class="updatedescription" placeholder="Update Description" data-index="${i}">
-        <input data-project=${projectIndex} type="date" class="updateduedate" data-index="${i}">
-        <select data-project=${projectIndex}  class="updatepriority" data-index="${i}">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-        </select>
-
-        <button data-input="submit" data-project=${projectIndex} data-index="${i}">submit</button>
-        `;
-        lists.appendChild(todo);
+        createTodo(i, j);
       }
     }
   }
