@@ -96,6 +96,16 @@ nav #plussign:hover {
   width: 80%;
 }
 
+.sidebar #projectname {
+  border: none;
+  padding: 1rem 0;
+}
+
+.sidebar #projectname:focus {
+  border: 2px blue;
+  outline: blue 1px solid;
+}
+
 .sidebar select {
   width: 80%;
   background-color: cornflowerblue;
@@ -235,5 +245,28 @@ section {
   display: inline;
   margin-right: 10rem;
   width: 50%;
+}
+
+#todoheader {
+  font-size: 4rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  position: relative;
+}
+
+#todoheader i {
+  font-size: 4rem;
+  position: absolute;
+  top: 0.5rem;
+  right: 2rem;
+  cursor: pointer;
+}
+
+#todoheader i:hover {
+  color: red;
 }
 /*# sourceMappingURL=main.css.map */

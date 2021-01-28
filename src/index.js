@@ -41,6 +41,7 @@ const addProject = document.querySelector('#addproject');
 const projectForm = document.querySelector('#projectform');
 const chooseProjects = document.querySelector('#projects');
 const selectPriority = document.querySelector('#select-priority');
+const sidebarProject = document.querySelector("#loadproject")
 const allToDo = document.querySelector('#alltodo');
 // Add ToDo Modal
 const addTodo = document.querySelector('#addtodo');
@@ -52,8 +53,9 @@ const toDoForm = document.querySelector('#todoform');
 const closeForm = document.querySelector('#closeform');
 const projectChoice = document.querySelector('#projectchoice');
 // To Do Container
+const todoContainer = document.querySelector(".todocontainer");
 const lists = document.querySelector('#lists');
-
+const todoHeader = document.querySelector("#todoheader");
 // Array for all projects
 
 // let myProjects = [["Default", []]];
@@ -61,10 +63,6 @@ const lists = document.querySelector('#lists');
 // Old array before local storage was implemented
 
 // Local storage implementation
-
-let loadAllProjects = true;
-let loadCurrentProject = false;
-let loadProjectPriority = false;
 
 if (!localStorage.getItem('savedProjects')) {
   const savedProjects = JSON.stringify([['Default', []]]);
@@ -92,7 +90,8 @@ const updateProjects = () => {
   for (let i = 0; i < myProjects.length; i++) {
     const project = document.createElement('option');
     project.setAttribute('value', i);
-    project.textContent = `${myProjects[i][0]}`;
+    project.setAttribute("class", "sidebar-project-choice");
+    project.innerHTML = `${myProjects[i][0]} <p data-project="${i}"`;
     chooseProjects.append(project);
   }
 };
@@ -137,8 +136,6 @@ const loadAllToDos = () => {
   }
 }
 
-loadAllToDos();
-
 const updateTodoList = () => {
   const projectIndex = chooseProjects.value;
 
@@ -162,16 +159,32 @@ const updateByPriority = () => {
   }
 }
 
+const allProjectHeader = () => {
+  todoHeader.textContent = "All things todo..."
+}
+
+const currentProjectHeader = () => {
+  let index = chooseProjects.value;
+  todoHeader.innerHTML = `${myProjects[index][0]} <i data-project=${index} data-input="delete"class="material-icons">delete</i>`;
+}
+
+let loadAllProjects = true;
+let loadCurrentProject = false;
+let loadProjectPriority = false;
 
 const pageLoader = () => {
   if(loadAllProjects === true){
     loadAllToDos();
+    allProjectHeader();
   } else if(loadCurrentProject === true){
     updateTodoList();
+    currentProjectHeader();
   } else if(loadProjectPriority === true){
     updateByPriority();
   }
 }
+
+pageLoader();
 
 addTodo.addEventListener('click', (e) => {
   e.preventDefault();
@@ -207,8 +220,8 @@ chooseProjects.addEventListener('change', () => {
 
 hamburger.addEventListener('click', () => {
   sidebar.classList.toggle('sidebar-hidden');
-  lists.classList.toggle('todomargin');
-  lists.classList.toggle('todo-adjust');
+  todoContainer.classList.toggle('todomargin');
+  todoContainer.classList.toggle('todo-adjust');
 });
 
 plusSign.addEventListener('click', () => {
@@ -263,3 +276,20 @@ selectPriority.addEventListener('change', () => {
   loadProjectPriority = true;
   pageLoader();
 });
+
+todoHeader.addEventListener("click", (e) => {
+  if(e.target.dataset.input === "delete"){
+    if(e.target.dataset.project === "0"){
+      alert("Cannot delete default project")
+   } else {
+      myProjects.splice(e.target.dataset.project, 1)
+      localSave();
+      updateProjects();
+      loadAllProjects = true;
+      loadCurrentProject = false;
+      loadProjectPriority = false;
+      pageLoader();
+
+    }
+  }
+})
