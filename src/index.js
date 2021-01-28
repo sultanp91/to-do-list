@@ -1,4 +1,5 @@
-// import { ToDo } from './toDoClass';
+// Need to import date FNS
+
 class ToDo {
   constructor(title, description, dueDate, priority) {
     (this.title = title),
@@ -61,6 +62,10 @@ const lists = document.querySelector('#lists');
 
 // Local storage implementation
 
+let loadAllProjects = true;
+let loadCurrentProject = false;
+let loadProjectPriority = false;
+
 if (!localStorage.getItem('savedProjects')) {
   const savedProjects = JSON.stringify([['Default', []]]);
 
@@ -122,16 +127,6 @@ const createTodo = (projectIndex, arrayIndex) => {
 
 // Updates the ToDo container with ToDos from selected projects
 
-const updateTodoList = () => {
-  const projectIndex = chooseProjects.value;
-
-  lists.innerHTML = '';
-
-  for (let i = 0; i < myProjects[projectIndex][1].length; i++) {
-    createTodo(projectIndex, i);
-  }
-};
-
 const loadAllToDos = () => {
   lists.innerHTML = '';
 
@@ -143,6 +138,40 @@ const loadAllToDos = () => {
 }
 
 loadAllToDos();
+
+const updateTodoList = () => {
+  const projectIndex = chooseProjects.value;
+
+  lists.innerHTML = '';
+
+  for (let i = 0; i < myProjects[projectIndex][1].length; i++) {
+    createTodo(projectIndex, i);
+  }
+};
+
+const updateByPriority = () => {
+  const projectPriority = selectPriority.value;
+  lists.innerHTML = '';
+
+  for (let i = 0; i < myProjects.length; i++) {
+    for (let j = 0; myProjects[i][1].length; j++) {
+      if(myProjects[i][1][j].priority === projectPriority) {
+        createTodo(i, j);
+      }
+    }
+  }
+}
+
+
+const pageLoader = () => {
+  if(loadAllProjects === true){
+    loadAllToDos();
+  } else if(loadCurrentProject === true){
+    updateTodoList();
+  } else if(loadProjectPriority === true){
+    updateByPriority();
+  }
+}
 
 addTodo.addEventListener('click', (e) => {
   e.preventDefault();
@@ -156,7 +185,7 @@ addTodo.addEventListener('click', (e) => {
 
   myProjects[projectIndex][1].push(newtodo);
   toDoForm.reset();
-  updateTodoList();
+  pageLoader();
   document.querySelector('.modal').classList.toggle('modal-active');
   localSave();
 });
@@ -169,7 +198,12 @@ addProject.addEventListener('click', (e) => {
   localSave();
 });
 
-chooseProjects.addEventListener('change', updateTodoList);
+chooseProjects.addEventListener('change', () => {
+  loadAllProjects = false;
+  loadCurrentProject = true;
+  loadProjectPriority = true;
+  pageLoader();
+});
 
 hamburger.addEventListener('click', () => {
   sidebar.classList.toggle('sidebar-hidden');
@@ -195,7 +229,7 @@ lists.addEventListener('click', (e) => {
 
   if (e.target.dataset.input === 'delete') {
     myProjects[projectIndex][1].splice(todoIndex, 1);
-    updateTodoList();
+    pageLoader();
     localSave();
   } else if (e.target.dataset.input === 'submit') {
     myProjects[projectIndex][1][
@@ -210,25 +244,22 @@ lists.addEventListener('click', (e) => {
     myProjects[projectIndex][1][
       todoIndex
     ].updatePriority = todoParent.querySelector('.updatepriority').value;
-    updateTodoList();
+    pageLoader();
     localSave();
   }
 });
 
 
 allToDo.addEventListener('click', () => {
-  loadAllToDos();
+  loadAllProjects = true;
+  loadCurrentProject = false;
+  loadProjectPriority = false;
+  pageLoader();
 });
 
 selectPriority.addEventListener('change', () => {
-  const projectPriority = selectPriority.value;
-  lists.innerHTML = '';
-
-  for (let i = 0; i < myProjects.length; i++) {
-    for (let j = 0; myProjects[i][1].length; j++) {
-      if (myProjects[j][1][i].priority === projectPriority) {
-        createTodo(i, j);
-      }
-    }
-  }
+  loadAllProjects = false;
+  loadCurrentProject = false;
+  loadProjectPriority = true;
+  pageLoader();
 });
