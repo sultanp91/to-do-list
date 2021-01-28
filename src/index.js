@@ -2,55 +2,55 @@
 // import {updateProjects} from './addProjects';
 
 class ToDo {
-        constructor(title, description, dueDate, priority) {
-        this.title = title,
-        this.description =  description,
-        this.dueDate = dueDate,
-        this.priority = priority,
-        this.completion = false;
+  constructor(title, description, dueDate, priority) {
+    this.title = title,
+    this.description = description,
+    this.dueDate = dueDate,
+    this.priority = priority,
+    this.completion = false;
+  }
+
+  set updateTitle(title) {
+    this.title = title;
+  }
+
+  set updateDescription(description) {
+    this.description = description;
+  }
+
+  set updateDueDate(dueDate) {
+    this.dueDate = dueDate;
+  }
+
+  set updatePriority(priority) {
+    this.priority = priority;
+  }
 }
 
-set updateTitle(title){
-        this.title = title;     
-}
+// DOM elements
 
-set updateDescription(description){
-        this.description = description;
-}
-
-set updateDueDate(dueDate){
-        this.dueDate = dueDate;
-}
-
-set updatePriority(priority){
-        this.priority = priority;
-}
-
-}
-
-//DOM elements
-
-const hamburger = document.querySelector("#hamburger");
-const sidebar = document.querySelector(".sidebar");
-const plusSign = document.querySelector("#plussign")
-const addTodo = document.querySelector("#addtodo");
-const toDoTitle = document.querySelector("#todotitle");
-const toDoDescription = document.querySelector("#tododescription")
-const toDoDate = document.querySelector("#tododate")
-const toDoPriority = document.querySelector("#todopriority")
-const toDoForm =  document.querySelector("#todoform")
-const closeForm = document.querySelector("#closeform")
-
-const projectName = document.querySelector("#projectname")
-const addProject = document.querySelector("#addproject");
-const projectForm = document.querySelector("#projectform")
-
-const projectChoice = document.querySelector("#projectchoice");
-const chooseProjects = document.querySelector("#projects")
-const selectPriority = document.querySelector("#select-priority");
-
-const lists = document.querySelector("#lists");
-const allToDo = document.querySelector("#alltodo");
+// Navbar
+const hamburger = document.querySelector('#hamburger');
+const plusSign = document.querySelector('#plussign');
+// Sidebar
+const sidebar = document.querySelector('.sidebar');
+const projectName = document.querySelector('#projectname');
+const addProject = document.querySelector('#addproject');
+const projectForm = document.querySelector('#projectform');
+const chooseProjects = document.querySelector('#projects');
+const selectPriority = document.querySelector('#select-priority');
+const allToDo = document.querySelector('#alltodo');
+// Add ToDo Modal
+const addTodo = document.querySelector('#addtodo');
+const toDoTitle = document.querySelector('#todotitle');
+const toDoDescription = document.querySelector('#tododescription');
+const toDoDate = document.querySelector('#tododate');
+const toDoPriority = document.querySelector('#todopriority');
+const toDoForm = document.querySelector('#todoform');
+const closeForm = document.querySelector('#closeform');
+const projectChoice = document.querySelector('#projectchoice');
+// To Do Container
+const lists = document.querySelector('#lists');
 
 
 // Array for all projects
@@ -59,54 +59,53 @@ const allToDo = document.querySelector("#alltodo");
 
 // Old array before local storage was implemented
 
+// Local storage implementation
 
-if(!localStorage.getItem("savedProjects")) {
-    
-    let savedProjects = JSON.stringify([["Default", []]]);
+if (!localStorage.getItem('savedProjects')) {
+  const savedProjects = JSON.stringify([['Default', []]]);
 
-     localStorage.setItem("savedProjects", savedProjects);
+  localStorage.setItem('savedProjects', savedProjects);
 }
 
-let myProjects = (JSON.parse(localStorage.savedProjects));
+const myProjects = (JSON.parse(localStorage.savedProjects));
 
 const localSave = () => {
-    localStorage.setItem("savedProjects", JSON.stringify(myProjects));
-}
+  localStorage.setItem('savedProjects', JSON.stringify(myProjects));
+};
 
+// Updates the list of Project containers for todo items
 
 const updateProjects = () => {
-    projectChoice.textContent = "";
-    chooseProjects.textContent = "";
-    for(let i = 0; i < myProjects.length; i++){
-        let project = document.createElement("option");
-        project.setAttribute("value", i);
-        project.textContent = `${myProjects[i][0]}`;
-        projectChoice.append(project);
-    }
-    for(let i = 0; i < myProjects.length; i++){
-        let project = document.createElement("option");
-        project.setAttribute("value", i);
-        project.textContent = `${myProjects[i][0]}`;
-        chooseProjects.append(project);
-    }
+  projectChoice.textContent = '';
+  chooseProjects.textContent = '';
+  for (let i = 0; i < myProjects.length; i++) {
+    const project = document.createElement('option');
+    project.setAttribute('value', i);
+    project.textContent = `${myProjects[i][0]}`;
+    projectChoice.append(project);
+  }
+  for (let i = 0; i < myProjects.length; i++) {
+    const project = document.createElement('option');
+    project.setAttribute('value', i);
+    project.textContent = `${myProjects[i][0]}`;
+    chooseProjects.append(project);
+  }
+};
 
-}
+updateProjects();
 
 // Updates the ToDo container with ToDos from selected projects
 
 const updateTodoList = () => {
+  const projectIndex = chooseProjects.value;
 
-    
-    let projectIndex = chooseProjects.value;
+  lists.innerHTML = '';
 
-    lists.innerHTML = ""
+  for (let i = 0; i < myProjects[projectIndex][1].length; i++) {
+    const todo = document.createElement('div');
+    todo.setAttribute('class', 'tododiv');
 
-    for(let i = 0; i < myProjects[projectIndex][1].length; i++){
-        let todo = document.createElement("div");
-        todo.setAttribute("class", "tododiv")
-
-        todo.innerHTML = 
-        `<h3 class="todo-title" data-index="${i}">${myProjects[projectIndex][1][i].title}</h3>
+    todo.innerHTML = `<h3 class="todo-title" data-index="${i}">${myProjects[projectIndex][1][i].title}</h3>
         <p class="todo-description" data-index="${i}">${myProjects[projectIndex][1][i].description}</p>
         <p class="todo-duedate" data-input="update" index="${i}">${myProjects[projectIndex][1][i].dueDate}</p>
         <p class="todo-priority" data-index="${i}">Priority: ${myProjects[projectIndex][1][i].priority}</p>
@@ -123,94 +122,82 @@ const updateTodoList = () => {
         </select>
 
         <button data-input="submit" data-project=${projectIndex} data-index="${i}">submit</button>
-        `
-        lists.appendChild(todo);
-     
-    }
-}
+        `;
+    lists.appendChild(todo);
+  }
+};
 
+updateTodoList();
 
+addTodo.addEventListener('click', (e) => {
+  e.preventDefault();
+  const projectIndex = projectChoice.value;
+  const newtodo = new ToDo(toDoTitle.value, toDoDescription.value, toDoDate.value, toDoPriority.value);
 
-addTodo.addEventListener("click", (e) => {
+  myProjects[projectIndex][1].push(newtodo);
+  toDoForm.reset();
+  updateTodoList();
+  document.querySelector('.modal').classList.toggle('modal-active');
+  localSave();
+});
 
-    e.preventDefault();
-    let projectIndex = projectChoice.value;
-    let newtodo = new ToDo(toDoTitle.value, toDoDescription.value, toDoDate.value, toDoPriority.value);
+addProject.addEventListener('click', (e) => {
+  e.preventDefault();
+  myProjects.push([projectName.value, []]);
+  projectForm.reset();
+  updateProjects();
+  localSave();
+});
 
-    myProjects[projectIndex][1].push(newtodo);
-    toDoForm.reset();
+chooseProjects.addEventListener('change', updateTodoList);
+
+hamburger.addEventListener('click', () => {
+  sidebar.classList.toggle('sidebar-hidden');
+  lists.classList.toggle('todomargin');
+  lists.classList.toggle('todo-adjust');
+});
+
+plusSign.addEventListener('click', () => {
+  document.querySelector('.modal').classList.toggle('modal-active');
+});
+
+closeForm.addEventListener('click', (e) => {
+  e.preventDefault();
+  document.querySelector('.modal').classList.toggle('modal-active');
+});
+
+// delete and edit todo items
+
+lists.addEventListener('click', (e) => {
+  const projectIndex = e.target.dataset.project;
+  const todoIndex = e.target.dataset.index;
+  const todoParent = e.target.parentElement;
+
+  if (e.target.dataset.input === 'delete') {
+    myProjects[projectIndex][1].splice(todoIndex, 1);
     updateTodoList();
-    document.querySelector(".modal").classList.toggle("modal-active");
     localSave();
-})
-
-
-addProject.addEventListener("click", (e) => {
-    e.preventDefault();
-    myProjects.push([projectName.value, []]);
-    projectForm.reset();
-    updateProjects();
+  } else if (e.target.dataset.input === 'submit') {
+    myProjects[projectIndex][1][todoIndex].updateTitle = todoParent.querySelector('.updatetitle').value;
+    myProjects[projectIndex][1][todoIndex].updateDescription = todoParent.querySelector('.updatedescription').value;
+    myProjects[projectIndex][1][todoIndex].updateDueDate = todoParent.querySelector('.updateduedate').value;
+    myProjects[projectIndex][1][todoIndex].updatePriority = todoParent.querySelector('.updatepriority').value;
+    updateTodoList();
     localSave();
-})
+  }
+});
 
-chooseProjects.addEventListener("change", updateTodoList);
+allToDo.addEventListener('click', () => {
+  lists.innerHTML = '';
 
-hamburger.addEventListener("click", () => {
-    sidebar.classList.toggle("sidebar-hidden");
-    lists.classList.toggle("todomargin");
-    lists.classList.toggle("todo-adjust");
-})
+  for (let i = 0; i < myProjects.length; i++) {
+    for (let j = 0; j < myProjects[i][1].length; j++) {
+      const projectIndex = i;
 
-plusSign.addEventListener("click", () => {
-    document.querySelector(".modal").classList.toggle("modal-active");
-})
+      const todo = document.createElement('div');
+      todo.setAttribute('class', 'tododiv');
 
-
-closeForm.addEventListener("click", (e) => {
-    e.preventDefault()
-    document.querySelector(".modal").classList.toggle("modal-active");
-})
-
-//delete and edit todo items
-
-lists.addEventListener("click", (e) => {
-
-    let projectIndex = e.target.dataset.project;
-    let todoIndex = e.target.dataset.index;
-    let todoParent = e.target.parentElement;
-
-    if(e.target.dataset.input === "delete"){
-        console.log(myProjects);
-        myProjects[projectIndex][1].splice(todoIndex, 1);
-        updateTodoList();
-        localSave();
-    } else if(e.target.dataset.input === "submit"){
-        
-        myProjects[projectIndex][1][todoIndex].updateTitle = todoParent.querySelector(".updatetitle").value;
-        myProjects[projectIndex][1][todoIndex].updateDescription = todoParent.querySelector(".updatedescription").value;
-        myProjects[projectIndex][1][todoIndex].updateDueDate = todoParent.querySelector(".updateduedate").value;
-        myProjects[projectIndex][1][todoIndex].updatePriority = todoParent.querySelector(".updatepriority").value;
-        updateTodoList();
-        localSave();
-    }
-    
-})
-
-allToDo.addEventListener("click", () => {
-    
-        lists.innerHTML = "";
-    
-    
-        for(let i = 0; i < myProjects.length; i++){
-        for(let j = 0; j < myProjects[i][1].length; j++){
-            
-            let projectIndex = i;
-
-            let todo = document.createElement("div");
-        todo.setAttribute("class", "tododiv")
-
-        todo.innerHTML = 
-        `<h3 class="todo-title" data-index="${j}">${myProjects[projectIndex][1][j].title}</h3>
+      todo.innerHTML = `<h3 class="todo-title" data-index="${j}">${myProjects[projectIndex][1][j].title}</h3>
         <p class="todo-description" data-index="${j}">${myProjects[projectIndex][1][j].description}</p>
         <p class="todo-duedate" data-input="update" index="${j}">${myProjects[projectIndex][1][j].dueDate}</p>
         <p class="todo-priority" data-index="${j}">Priority: ${myProjects[projectIndex][1][j].priority}</p>
@@ -227,29 +214,25 @@ allToDo.addEventListener("click", () => {
         </select>
 
         <button data-input="submit" data-project=${projectIndex} data-index="${j}">submit</button>
-        `
-        lists.appendChild(todo);
+        `;
+      lists.appendChild(todo);
+    }
+  }
+});
 
-        }
-     }
+selectPriority.addEventListener('change', () => {
+  const projectPriority = selectPriority.value;
 
-})
+  lists.innerHTML = '';
 
+  for (let j = 0; j < myProjects.length; j++) {
+    for (let i = 0; myProjects[j][1].length; i++) {
+      const projectIndex = j;
+      if (myProjects[j][1][i].priority === projectPriority) {
+        const todo = document.createElement('div');
+        todo.setAttribute('class', 'tododiv');
 
-
-selectPriority.addEventListener("change", () => {
-    let projectPriority = selectPriority.value
-    lists.innerHTML = "";
-
-    for(let j = 0; j < myProjects.length; j++){
-        for(let i = 0; myProjects[j][1].length; i++){
-            let projectIndex = j;
-            if(myProjects[j][1][i].priority === projectPriority){
-                let todo = document.createElement("div");
-        todo.setAttribute("class", "tododiv")
-
-        todo.innerHTML = 
-        `<h3 class="todo-title" data-index="${i}">${myProjects[projectIndex][1][i].title}</h3>
+        todo.innerHTML = `<h3 class="todo-title" data-index="${i}">${myProjects[projectIndex][1][i].title}</h3>
         <p class="todo-description" data-index="${i}">${myProjects[projectIndex][1][i].description}</p>
         <p class="todo-duedate" data-input="update" index="${i}">${myProjects[projectIndex][1][i].dueDate}</p>
         <p class="todo-priority" data-index="${i}">Priority: ${myProjects[projectIndex][1][i].priority}</p>
@@ -266,14 +249,9 @@ selectPriority.addEventListener("change", () => {
         </select>
 
         <button data-input="submit" data-project=${projectIndex} data-index="${i}">submit</button>
-        `
+        `;
         lists.appendChild(todo);
-     
-
-            }
-
-
-
-        }
+      }
     }
-})
+  }
+});
