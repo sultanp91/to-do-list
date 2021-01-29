@@ -77,7 +77,6 @@ nav {
     height: 100%;
     width: 35rem;
     background-color: $side-menu-color;
-    font-size: 2rem;
     display: flex;
     flex-direction: column;
     transition: all 0.4s ease-out;
@@ -89,15 +88,27 @@ nav {
         margin-top: 2rem;
     }
 
+    h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        font-size: 2rem;
+    }
+
     h3 {
+        width: 80%;
+        margin: 1rem auto;
+        background-color: navajowhite;
         text-align: center;
         padding: 1rem 0;
+        font-size: 1.6rem;
     }
+
     input {
         margin: 0 auto;
         display: block;
         width: 80%;
     }
+
     #projectname {
         border: solid 1px grey;
         padding: 1.3rem 0;
@@ -124,8 +135,10 @@ nav {
         outline: none;
         display: block;
         margin: 0 auto;
+        background-color: navajowhite;
         padding: 1rem 0;
         cursor: pointer;
+        text-align: center;
     }
 }
 
@@ -143,7 +156,7 @@ section {
     width: 100%;
     height: 100%;
     transition: all 0.4s ease-out;
-    background-color: $main-body-color;
+    background-color: white;
 }
 
 .modal {
@@ -219,15 +232,21 @@ section {
 }
 
 .tododiv {
-    max-width: 90rem;
+    max-width: 95rem;
+    min-width: 60rem;
     width: 80%;
     height: 13rem;
     background-color: green;
     margin: 2rem auto;
     padding: 1rem;
     border-radius: 10px;
-    background-color: darken($side-menu-color, 0.5);
+    background-color: darken($main-body-color, 20);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 8px rgba(0, 0, 0, 0.3);
     
+    .bold {
+        font-weight: bold;
+    }
+
     .todo-title {
         text-align: center;
         font-size: 2.5rem;

@@ -1,29 +1,20 @@
 // Need to import date FNS
+ import { format, compareAsc } from 'date-fns'
 
 class ToDo {
   constructor(title, description, dueDate, priority) {
     (this.title = title),
     (this.description = description),
-    (this.dueDate = dueDate),
+//    (this.dueDate = dueDate),
+    (this.dueDate = format(new Date(dueDate), 'Do MMM yy')),
     (this.priority = priority),
     (this.completion = false);
   }
 
-  set updateTitle(title) {
-    this.title = title;
-  }
+  set updateDate(dueDate){
+    this.dueDate = format(new Date(dueDate), 'Do MMM yy');
+  } 
 
-  set updateDescription(description) {
-    this.description = description;
-  }
-
-  set updateDueDate(dueDate) {
-    this.dueDate = dueDate;
-  }
-
-  set updatePriority(priority) {
-    this.priority = priority;
-  }
 }
 
 // import { createTodo } from './createTodo';
@@ -43,6 +34,7 @@ const chooseProjects = document.querySelector('#projects');
 const selectPriority = document.querySelector('#select-priority');
 const sidebarProject = document.querySelector("#loadproject")
 const allToDo = document.querySelector('#alltodo');
+const todaySidebar = document.querySelector("#todaystodo")
 // Add ToDo Modal
 const addTodo = document.querySelector('#addtodo');
 const toDoTitle = document.querySelector('#todotitle');
@@ -76,7 +68,7 @@ const localSave = () => {
   localStorage.setItem('savedProjects', JSON.stringify(myProjects));
 };
 
-// Updates the list of Project containers for todo items
+// Updates the list of Project containers for todo items on both sidebar and modal
 
 const updateProjects = () => {
   projectChoice.textContent = '';
@@ -105,9 +97,10 @@ const createTodo = (projectIndex, arrayIndex) => {
   todo.setAttribute('class', 'tododiv');
 
   todo.innerHTML = `<h3 class="todo-title" data-index="${arrayIndex}">${myProjects[projectIndex][1][arrayIndex].title}</h3>
-  <p class="todo-description" data-index="${arrayIndex}">${myProjects[projectIndex][1][arrayIndex].description}</p>
-  <p class="todo-duedate" data-input="update" index="${arrayIndex}">${myProjects[projectIndex][1][arrayIndex].dueDate}</p>
-  <p class="todo-priority" data-index="${arrayIndex}">Priority: ${myProjects[projectIndex][1][arrayIndex].priority}</p>
+  <br><hr><br>
+  <p class="todo-description" data-index="${arrayIndex}"><span class="bold">Description: </span>${myProjects[projectIndex][1][arrayIndex].description}</p>
+  <p class="todo-duedate" data-input="update" index="${arrayIndex}"><span class="bold">Due: </span>${myProjects[projectIndex][1][arrayIndex].dueDate}</p>
+  <p class="todo-priority" data-index="${arrayIndex}"><span class="bold">Priority: </span> ${myProjects[projectIndex][1][arrayIndex].priority}</p>
   <button data-input="delete" data-project=${projectIndex} data-index="${arrayIndex}">Delete</button> 
   <br>
   <button data-input="edit" data-project=${projectIndex} data-index="${arrayIndex}">Edit</button>
@@ -115,16 +108,16 @@ const createTodo = (projectIndex, arrayIndex) => {
   <input data-project=${projectIndex}  type="text" class="updatedescription" placeholder="Update Description" data-index="${arrayIndex}">
   <input data-project=${projectIndex} type="date" class="updateduedate" data-index="${arrayIndex}">
   <select data-project=${projectIndex}  class="updatepriority" data-index="${arrayIndex}">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
+      <option value="Low">Low</option>
+      <option value="Medium">Medium</option>
+      <option value="High">High</option>
   </select>
 
   <button data-input="submit" data-project=${projectIndex} data-index="${arrayIndex}">submit</button>`;
   lists.appendChild(todo);
 };
 
-// Updates the ToDo container with ToDos from selected projects
+// Updates the ToDo container with ToDos from all projects
 
 const loadAllToDos = () => {
   lists.innerHTML = '';
@@ -147,12 +140,25 @@ const updateTodoList = () => {
 };
 
 const updateByPriority = () => {
+
   const projectPriority = selectPriority.value;
   lists.innerHTML = '';
 
   for (let i = 0; i < myProjects.length; i++) {
-    for (let j = 0; myProjects[i][1].length; j++) {
+    for (let j = 0; j < myProjects[i][1].length; j++) {
       if(myProjects[i][1][j].priority === projectPriority) {
+        createTodo(i, j);
+      }
+    }
+  }
+}
+
+const updateToday = () => {
+  lists.innerHTML = '';
+
+  for (let i = 0; i < myProjects.length; i++) {
+    for (let j = 0; j < myProjects[i][1].length; j++) {
+      if(myProjects[i][1][j].dueDate === format(new Date(), 'Do MMM yy')) {
         createTodo(i, j);
       }
     }
@@ -165,12 +171,19 @@ const allProjectHeader = () => {
 
 const currentProjectHeader = () => {
   let index = chooseProjects.value;
-  todoHeader.innerHTML = `${myProjects[index][0]} <i data-project=${index} data-input="delete"class="material-icons">delete</i>`;
+  todoHeader.innerHTML = `${myProjects[index][0]} <i data-project=${index} 
+  data-input="delete"class="material-icons">delete_forever</i>`;
 }
+
+/*const currentPriorityHeader = () => {
+  console.log("GameSTOONKS");
+} */
 
 let loadAllProjects = true;
 let loadCurrentProject = false;
 let loadProjectPriority = false;
+let loadProjectDate = false;
+
 
 const pageLoader = () => {
   if(loadAllProjects === true){
@@ -181,6 +194,9 @@ const pageLoader = () => {
     currentProjectHeader();
   } else if(loadProjectPriority === true){
     updateByPriority();
+ //   currentPriorityHeader();
+  } else if(loadProjectDate === true){
+    updateToday()
   }
 }
 
@@ -215,6 +231,7 @@ chooseProjects.addEventListener('change', () => {
   loadAllProjects = false;
   loadCurrentProject = true;
   loadProjectPriority = true;
+  loadProjectDate = false;
   pageLoader();
 });
 
@@ -239,43 +256,41 @@ lists.addEventListener('click', (e) => {
   const projectIndex = e.target.dataset.project;
   const todoIndex = e.target.dataset.index;
   const todoParent = e.target.parentElement;
-
   if (e.target.dataset.input === 'delete') {
     myProjects[projectIndex][1].splice(todoIndex, 1);
     pageLoader();
     localSave();
   } else if (e.target.dataset.input === 'submit') {
-    myProjects[projectIndex][1][
-      todoIndex
-    ].updateTitle = todoParent.querySelector('.updatetitle').value;
-    myProjects[projectIndex][1][
-      todoIndex
-    ].updateDescription = todoParent.querySelector('.updatedescription').value;
-    myProjects[projectIndex][1][
-      todoIndex
-    ].updateDueDate = todoParent.querySelector('.updateduedate').value;
-    myProjects[projectIndex][1][
-      todoIndex
-    ].updatePriority = todoParent.querySelector('.updatepriority').value;
-    pageLoader();
+    myProjects[projectIndex][1][todoIndex].title = todoParent.querySelector('.updatetitle').value;
+    myProjects[projectIndex][1][todoIndex].description = todoParent.querySelector('.updatedescription').value;
+    myProjects[projectIndex][1][todoIndex].updateDate = todoParent.querySelector('.updateduedate').value;
+    myProjects[projectIndex][1][todoIndex].priority = todoParent.querySelector('.updatepriority').value;
+    pageLoader()
     localSave();
   }
 });
 
+// loads up all todo items in all projects
 
 allToDo.addEventListener('click', () => {
   loadAllProjects = true;
   loadCurrentProject = false;
   loadProjectPriority = false;
+  loadProjectDate = false;
   pageLoader();
 });
+
+// allows user to sort through todo items by priority
 
 selectPriority.addEventListener('change', () => {
   loadAllProjects = false;
   loadCurrentProject = false;
   loadProjectPriority = true;
+  loadProjectDate = false;
   pageLoader();
 });
+
+// deletes projects and takes user to the all projects screen
 
 todoHeader.addEventListener("click", (e) => {
   if(e.target.dataset.input === "delete"){
@@ -288,8 +303,17 @@ todoHeader.addEventListener("click", (e) => {
       loadAllProjects = true;
       loadCurrentProject = false;
       loadProjectPriority = false;
+      loadProjectDate = false;
       pageLoader();
 
     }
   }
 })
+
+todaySidebar.addEventListener("click", () => {
+      loadAllProjects = false;
+      loadCurrentProject = false;
+      loadProjectPriority = false;
+      loadProjectDate = true;
+      pageLoader();
+});

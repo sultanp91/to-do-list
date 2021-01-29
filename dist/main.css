@@ -71,7 +71,6 @@ nav #plussign:hover {
   height: 100%;
   width: 35rem;
   background-color: #fafafa;
-  font-size: 2rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,9 +88,19 @@ nav #plussign:hover {
   margin-top: 2rem;
 }
 
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
 .sidebar h3 {
+  width: 80%;
+  margin: 1rem auto;
+  background-color: navajowhite;
   text-align: center;
   padding: 1rem 0;
+  font-size: 1.6rem;
 }
 
 .sidebar input {
@@ -125,8 +134,10 @@ nav #plussign:hover {
   outline: none;
   display: block;
   margin: 0 auto;
+  background-color: navajowhite;
   padding: 1rem 0;
   cursor: pointer;
+  text-align: center;
 }
 
 .sidebar-hidden {
@@ -143,7 +154,7 @@ section {
   height: 100%;
   -webkit-transition: all 0.4s ease-out;
   transition: all 0.4s ease-out;
-  background-color: #faf6e9;
+  background-color: white;
 }
 
 .modal {
@@ -234,14 +245,21 @@ section {
 }
 
 .tododiv {
-  max-width: 90rem;
+  max-width: 95rem;
+  min-width: 60rem;
   width: 80%;
   height: 13rem;
   background-color: green;
   margin: 2rem auto;
   padding: 1rem;
   border-radius: 10px;
-  background-color: #f9f9f9;
+  background-color: #e7d496;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 8px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tododiv .bold {
+  font-weight: bold;
 }
 
 .tododiv .todo-title {
