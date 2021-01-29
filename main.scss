@@ -23,7 +23,7 @@ main {
 
 
 $header-color: #db4c3f;
-$main-body-color: #ffffff;
+$main-body-color: #faf6e9;
 $side-menu-color: #fafafa;
 $text-color: #202020;
 $blue-button: rgb(77, 121, 255);
@@ -85,6 +85,10 @@ nav {
     left: 0;
 
 
+    .sidebar-header{
+        margin-top: 2rem;
+    }
+
     h3 {
         text-align: center;
         padding: 1rem 0;
@@ -95,24 +99,32 @@ nav {
         width: 80%;
     }
     #projectname {
-        border: none;
-        padding: 1rem 0;
-        &:focus{
-        border: 2px blue;
-        outline: blue 1px solid;
-        }
-        
+        border: solid 1px grey;
+        padding: 1.3rem 0;
+        border-radius: 0.5rem;
+        outline: none;
+        text-indent: 5px;
+        font-size: 1.5rem;
     }
+
+    #addproject, #alltodo{
+        border: none;
+        padding: 1rem 5rem;
+        display: block;
+        margin: 1rem auto;
+        outline: none;
+        border-radius: 5px;
+    }
+
 
     select {
         width: 80%;
-        background-color: cornflowerblue;
         border: none;
         border-radius: 10px;
         outline: none;
         display: block;
         margin: 0 auto;
-        padding: 1.5rem 0;
+        padding: 1rem 0;
         cursor: pointer;
     }
 }
@@ -131,6 +143,7 @@ section {
     width: 100%;
     height: 100%;
     transition: all 0.4s ease-out;
+    background-color: $main-body-color;
 }
 
 .modal {
@@ -206,14 +219,14 @@ section {
 }
 
 .tododiv {
-
+    max-width: 90rem;
     width: 80%;
     height: 13rem;
     background-color: green;
     margin: 2rem auto;
     padding: 1rem;
     border-radius: 10px;
-    background-color: rgba($header-color, 0.3);
+    background-color: darken($side-menu-color, 0.5);
     
     .todo-title {
         text-align: center;
@@ -235,6 +248,7 @@ section {
 #todoheader {
     font-size: 4rem;
     display: flex;
+    margin-top: 1rem;
     justify-content: center;
     position: relative;
     i {
@@ -247,4 +261,8 @@ section {
             color: red;
         }
     }
+}
+
+#lists {
+    overflow-y: auto;
 }

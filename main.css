@@ -85,6 +85,10 @@ nav #plussign:hover {
   left: 0;
 }
 
+.sidebar .sidebar-header {
+  margin-top: 2rem;
+}
+
 .sidebar h3 {
   text-align: center;
   padding: 1rem 0;
@@ -97,24 +101,31 @@ nav #plussign:hover {
 }
 
 .sidebar #projectname {
-  border: none;
-  padding: 1rem 0;
+  border: solid 1px grey;
+  padding: 1.3rem 0;
+  border-radius: 0.5rem;
+  outline: none;
+  text-indent: 5px;
+  font-size: 1.5rem;
 }
 
-.sidebar #projectname:focus {
-  border: 2px blue;
-  outline: blue 1px solid;
+.sidebar #addproject, .sidebar #alltodo {
+  border: none;
+  padding: 1rem 5rem;
+  display: block;
+  margin: 1rem auto;
+  outline: none;
+  border-radius: 5px;
 }
 
 .sidebar select {
   width: 80%;
-  background-color: cornflowerblue;
   border: none;
   border-radius: 10px;
   outline: none;
   display: block;
   margin: 0 auto;
-  padding: 1.5rem 0;
+  padding: 1rem 0;
   cursor: pointer;
 }
 
@@ -132,6 +143,7 @@ section {
   height: 100%;
   -webkit-transition: all 0.4s ease-out;
   transition: all 0.4s ease-out;
+  background-color: #faf6e9;
 }
 
 .modal {
@@ -222,13 +234,14 @@ section {
 }
 
 .tododiv {
+  max-width: 90rem;
   width: 80%;
   height: 13rem;
   background-color: green;
   margin: 2rem auto;
   padding: 1rem;
   border-radius: 10px;
-  background-color: rgba(219, 76, 63, 0.3);
+  background-color: #f9f9f9;
 }
 
 .tododiv .todo-title {
@@ -252,6 +265,7 @@ section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 1rem;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -268,5 +282,9 @@ section {
 
 #todoheader i:hover {
   color: red;
+}
+
+#lists {
+  overflow-y: auto;
 }
 /*# sourceMappingURL=main.css.map */

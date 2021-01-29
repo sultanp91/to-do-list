@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
-    <script defer type="module" src="../src/index.js"></script>
+    <script defer type="module" src="./main.js"></script>
     <link rel="stylesheet" href="./main.css">
 </head>
 <body>
@@ -22,15 +22,19 @@
     <main>
 
     <div class="sidebar">
-        <h3>New Project</h3>
+        <h3 class="sidebar-header">Project Manager</h3>
         <form id="projectform">
-            <input type="text" placeholder="Add New Project..."name="name" id="projectname">
-            <button id="addproject">Submit</button>
+            <input type="text" placeholder="Add New Project..."name="name" id="projectname" required>
+            <input type="submit" value="Submit" id="addproject">
         </form>
-        
-        <h3 id="alltodo">All To Do</h3>
 
+        <input id="alltodo" type="button" value="Display All ToDos">
         <h3>Today</h3>
+
+        <h3>Choose Project</h3>
+    
+        <select name="chooseproject" id="projects">
+        </select>
 
         <h3>Select Priority</h3>
         <select name="chooseprojectpriority" id="select-priority">
@@ -39,20 +43,11 @@
             <option value="high">High</option>
         </select>
 
-
-        <h3>Choose Project</h3>
-    
-        <select name="chooseproject" id="projects">
-          <!---  <option value="0">Default</option> -->
-        </select>
-
     </div>
     
     <section class="todocontainer">
         <div>
-            <h1 id="todoheader">
-
-            </h1>
+            <h1 id="todoheader"></h1>
         </div>
         <div id="lists">
 
@@ -61,9 +56,10 @@
     
         <div class="modal">
                             
-                            <h3>New ToDo</h3>
+            <h3>New ToDo</h3>
                     
-                            <form id="todoform">
+            <form id="todoform">
+
                 <ul>
                     <li>
                         <label for="project">Project:</label>
@@ -76,16 +72,15 @@
 
                     <li><label for="title">Title:</label></li>
                     <li> 
-                            <input type="text" placeholder="Title" name="title" id="todotitle">
+                        <input type="text" placeholder="Title" name="title" id="todotitle">
                     </li>
                     <li>
                         <label for="description">Description: </label>
                     </li>
                     <li>
-                        
                         <input type="text" placeholder="Description" name="description" id="tododescription">
                     </li>
-                    <li>   <label for="date">Date:  </label></li>
+                    <li><label for="date">Date:</label></li>
                     <li>
                         <input type="date" name="date" id="tododate">
                     </li>
@@ -98,17 +93,12 @@
                         </select>
                     </li>
                     <li>   
-
                         <button id="addtodo">Submit</button>
-
                     </li>
                     <li>
                         <button id="closeform">Close</button>
                     </li>
-
-                </ul>
-
-                            
+                </ul>                     
             </form>
         </div>
     </main>
