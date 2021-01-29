@@ -22,25 +22,24 @@
     <main>
 
     <div class="sidebar">
-        <h3 class="sidebar-header">Project Manager</h3>
+        <h2 class="sidebar-header">Project Manager</h2>
         <form id="projectform">
             <input type="text" placeholder="Add New Project..."name="name" id="projectname" required>
-            <input type="submit" value="Submit" id="addproject">
+            <h3 id="addproject">Add New Project<i class="material-icons">create_new_folder</i></h3>
         </form>
 
-        <input id="alltodo" type="button" value="Display All ToDos">
-        <h3>Today</h3>
+        <h3 id="alltodo">Display all tasks<i class="material-icons">fact_check</i></h3>
+        
+        <h3 id="todaystodo">Today <i class="material-icons">today</i> </h3>
 
-        <h3>Choose Project</h3>
-    
         <select name="chooseproject" id="projects">
         </select>
 
         <h3>Select Priority</h3>
         <select name="chooseprojectpriority" id="select-priority">
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
         </select>
 
     </div>
@@ -87,9 +86,9 @@
                     <li><label for="priority">Priority:  </label></li>
                     <li>
                         <select name="priority" id="todopriority">
-                            <option value="low">Low</option>
-                            <option value="medium">Medium</option>
-                            <option value="high">High</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
                         </select>
                     </li>
                     <li>   
