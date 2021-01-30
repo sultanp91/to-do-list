@@ -164,7 +164,7 @@ const updateToday = () => {
 }
 
 const allProjectHeader = () => {
-  todoHeader.textContent = "All things todo..."
+  todoHeader.textContent = "All Tasks"
 }
 
 const currentProjectHeader = () => {
@@ -174,12 +174,12 @@ const currentProjectHeader = () => {
 }
 
 const todayHeader = () => {
-  todoHeader.textContent = "Today's Tasks"
+  todoHeader.textContent = "Today's Tasks";
 }
 
-/*const currentPriorityHeader = () => {
-  console.log("GameSTOONKS");
-} */
+const currentPriorityHeader = () => {
+  todoHeader.textContent = `${selectPriority.value} Priority Tasks`
+}
 
 let loadAllProjects = true;
 let loadCurrentProject = false;
@@ -196,7 +196,7 @@ const pageLoader = () => {
     currentProjectHeader();
   } else if(loadProjectPriority === true){
     updateByPriority();
- //   currentPriorityHeader();
+    currentPriorityHeader();
   } else if(loadProjectDate === true){
     updateToday();
     todayHeader();
