@@ -1,4 +1,3 @@
-// Need to import date FNS
  import { format, compareAsc } from 'date-fns'
 
 class ToDo {
@@ -15,9 +14,6 @@ class ToDo {
   } 
 
 }
-
-// import { createTodo } from './createTodo';
-// import {updateProjects} from './addProjects';
 
 // DOM elements
 
