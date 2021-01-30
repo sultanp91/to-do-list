@@ -323,6 +323,8 @@ section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   -ms-flex-pack: distribute;
       justify-content: space-around;
   visibility: hidden;
@@ -368,7 +370,7 @@ section {
   overflow-y: auto;
 }
 
-@media (max-width: 400px) {
+@media screen and (max-width: 400px) {
   .tododiv {
     max-width: 400px;
     width: 100%;
@@ -377,13 +379,21 @@ section {
   section {
     margin-left: 0;
   }
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
+  }
 }
 
-@media (max-width: 720px) {
+@media screen and (max-width: 720px) {
   .tododiv {
     max-width: 700px;
     width: 90%;
     height: 20rem;
+  }
+  .sidebar {
+    position: absolute;
+    z-index: 1000;
   }
 }
 /*# sourceMappingURL=main.css.map */

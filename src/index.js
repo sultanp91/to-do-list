@@ -1,4 +1,4 @@
- import { format, compareAsc } from 'date-fns'
+ import { format } from 'date-fns'
 
 class ToDo {
   constructor(title, description, dueDate, priority) {
@@ -8,11 +8,6 @@ class ToDo {
     (this.priority = priority),
     (this.completion = false);
   }
-
-  set updateDate (dueDate){
-    return this.dueDate = format(new Date(dueDate), 'do MMM yy');
-  } 
-
 }
 
 // DOM elements
@@ -212,8 +207,12 @@ pageLoader();
 
 addTodo.addEventListener('click', (e) => {
   e.preventDefault();
-  const projectIndex = projectChoice.value;
-  const newtodo = new ToDo(
+  if(toDoTitle.value === "" || toDoDescription.value === "" 
+  || toDoDate.value === ""){
+    alert("Please fill in all fields")
+  } else {
+    const projectIndex = projectChoice.value;
+    const newtodo = new ToDo(
     toDoTitle.value,
     toDoDescription.value,
     toDoDate.value,
@@ -225,14 +224,20 @@ addTodo.addEventListener('click', (e) => {
   pageLoader();
   document.querySelector('.modal').classList.toggle('modal-active');
   localSave();
+
+  }
 });
 
 addProject.addEventListener('click', (e) => {
   e.preventDefault();
-  myProjects.push([projectName.value, []]);
-  projectForm.reset();
-  updateProjects();
-  localSave();
+  if(projectName.value === ""){
+    alert("Field cannot be empty")
+  } else {
+    myProjects.push([projectName.value, []]);
+    projectForm.reset();
+    updateProjects();
+    localSave();
+  }
 });
 
 chooseProjects.addEventListener('change', () => {
@@ -269,13 +274,19 @@ lists.addEventListener('click', (e) => {
     pageLoader();
     localSave();
   } else if (e.target.dataset.input === 'submit') {
-    myProjects[projectIndex][1][todoIndex].title = todoParent.querySelector('.updatetitle').value;
+    if(todoParent.querySelector('.updatetitle').value === "" 
+    || todoParent.querySelector('.updatedescription').value === ""
+    || todoParent.querySelector('.updateduedate').value === ""){
+      alert("Please fill in all fields before submitting")
+    } else { myProjects[projectIndex][1][todoIndex].title = todoParent.querySelector('.updatetitle').value;
     myProjects[projectIndex][1][todoIndex].description = todoParent.querySelector('.updatedescription').value;
     myProjects[projectIndex][1][todoIndex].dueDate = format(new Date(todoParent.querySelector('.updateduedate').value), 'do MMM yy');
     myProjects[projectIndex][1][todoIndex].priority = todoParent.querySelector('.updatepriority').value;
     pageLoader()
     localSave();
-  } else if (e.target.dataset.input === 'edit'){
+    }
+    
+  } else if(e.target.dataset.input === 'edit'){
     todoParent.querySelector('.tododiv-input').classList.toggle("tododiv-input__visible");
   }
 });
