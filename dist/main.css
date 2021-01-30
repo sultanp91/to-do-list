@@ -97,10 +97,37 @@ nav #plussign:hover {
 .sidebar h3 {
   width: 80%;
   margin: 1rem auto;
-  background-color: navajowhite;
   text-align: center;
   padding: 1rem 0;
   font-size: 1.6rem;
+  position: relative;
+  border-bottom: 1px solid black;
+  -webkit-transition: -webkit-transform 0.3s linear;
+  transition: -webkit-transform 0.3s linear;
+  transition: transform 0.3s linear;
+  transition: transform 0.3s linear, -webkit-transform 0.3s linear;
+}
+
+.sidebar h3:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.sidebar h4 {
+  width: 80%;
+  margin: 1rem auto;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1.6rem;
+  position: relative;
+}
+
+.sidebar i {
+  position: absolute;
+  font-size: 2rem;
+  right: 1rem;
 }
 
 .sidebar input {
@@ -118,13 +145,8 @@ nav #plussign:hover {
   font-size: 1.5rem;
 }
 
-.sidebar #addproject, .sidebar #alltodo {
-  border: none;
-  padding: 1rem 5rem;
-  display: block;
-  margin: 1rem auto;
-  outline: none;
-  border-radius: 5px;
+.sidebar .sidebar-text {
+  background: none;
 }
 
 .sidebar select {
@@ -134,10 +156,13 @@ nav #plussign:hover {
   outline: none;
   display: block;
   margin: 0 auto;
-  background-color: navajowhite;
+  background-color: #fafafa;
   padding: 1rem 0;
   cursor: pointer;
+  font-size: 1.6rem;
+  font-weight: bold;
   text-align: center;
+  text-align-last: center;
 }
 
 .sidebar-hidden {
@@ -155,6 +180,8 @@ section {
   -webkit-transition: all 0.4s ease-out;
   transition: all 0.4s ease-out;
   background-color: white;
+  overflow-y: auto;
+  margin-bottom: 1rem;
 }
 
 .modal {
@@ -248,12 +275,11 @@ section {
   max-width: 95rem;
   min-width: 60rem;
   width: 80%;
-  height: 13rem;
-  background-color: green;
+  min-height: 16rem;
   margin: 2rem auto;
   padding: 1rem;
   border-radius: 10px;
-  background-color: #e7d496;
+  background-color: rgba(245, 245, 245, 0.8);
   -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 8px rgba(0, 0, 0, 0.3);
           box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 8px rgba(0, 0, 0, 0.3);
 }
@@ -262,20 +288,55 @@ section {
   font-weight: bold;
 }
 
-.tododiv .todo-title {
+.tododiv .tododiv-title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 .tododiv .todo-description {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
-.tododiv .todo-duedate, .tododiv .todo-priority {
-  font-size: 1.5rem;
-  display: inline;
-  margin-right: 10rem;
-  width: 50%;
+.tododiv .tododiv-contents {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1.6rem;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 0.5rem 0;
+}
+
+.tododiv button {
+  padding: 0.5rem 4rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.6rem;
+}
+
+.tododiv .tododiv-input {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  visibility: hidden;
+}
+
+.tododiv .tododiv-input input {
+  border: none;
+  border-radius: 5px;
+  text-indent: 5px;
+  padding: 0 1rem;
+  outline: none;
+}
+
+.tododiv-input__visible {
+  visibility: visible !important;
 }
 
 #todoheader {

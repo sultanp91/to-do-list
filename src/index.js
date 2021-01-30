@@ -5,14 +5,13 @@ class ToDo {
   constructor(title, description, dueDate, priority) {
     (this.title = title),
     (this.description = description),
-//    (this.dueDate = dueDate),
     (this.dueDate = format(new Date(dueDate), 'Do MMM yy')),
     (this.priority = priority),
     (this.completion = false);
   }
 
-  set updateDate(dueDate){
-    this.dueDate = format(new Date(dueDate), 'Do MMM yy');
+  set updateDate (dueDate){
+    return this.dueDate = format(new Date(dueDate), 'do MMM yy');
   } 
 
 }
@@ -96,14 +95,21 @@ const createTodo = (projectIndex, arrayIndex) => {
   const todo = document.createElement('div');
   todo.setAttribute('class', 'tododiv');
 
-  todo.innerHTML = `<h3 class="todo-title" data-index="${arrayIndex}">${myProjects[projectIndex][1][arrayIndex].title}</h3>
-  <br><hr><br>
+  todo.innerHTML = `
+  <div class="tododiv-title">
+  <h3 class="todo-title" data-index="${arrayIndex}">${myProjects[projectIndex][1][arrayIndex].title}</h3>
+  </div>
+  <br>
+  <hr>
+  <br>
   <p class="todo-description" data-index="${arrayIndex}"><span class="bold">Description: </span>${myProjects[projectIndex][1][arrayIndex].description}</p>
+  <div class="tododiv-contents">
   <p class="todo-duedate" data-input="update" index="${arrayIndex}"><span class="bold">Due: </span>${myProjects[projectIndex][1][arrayIndex].dueDate}</p>
   <p class="todo-priority" data-index="${arrayIndex}"><span class="bold">Priority: </span> ${myProjects[projectIndex][1][arrayIndex].priority}</p>
-  <button data-input="delete" data-project=${projectIndex} data-index="${arrayIndex}">Delete</button> 
-  <br>
-  <button data-input="edit" data-project=${projectIndex} data-index="${arrayIndex}">Edit</button>
+  <button class="tododiv-delete" data-input="delete" data-project=${projectIndex} data-index="${arrayIndex}">Delete</button> 
+  <button class="tododiv-edit" data-input="edit" data-project=${projectIndex} data-index="${arrayIndex}">Edit</button>
+  </div>
+  <div class="tododiv-input">
   <input data-project=${projectIndex} type="text" class="updatetitle" placeholder="Update title" data-index="${arrayIndex}">
   <input data-project=${projectIndex}  type="text" class="updatedescription" placeholder="Update Description" data-index="${arrayIndex}">
   <input data-project=${projectIndex} type="date" class="updateduedate" data-index="${arrayIndex}">
@@ -112,8 +118,9 @@ const createTodo = (projectIndex, arrayIndex) => {
       <option value="Medium">Medium</option>
       <option value="High">High</option>
   </select>
+  <button class="tododiv-edit" data-input="submit" data-project=${projectIndex} data-index="${arrayIndex}">submit</button>
+  </div>`;
 
-  <button data-input="submit" data-project=${projectIndex} data-index="${arrayIndex}">submit</button>`;
   lists.appendChild(todo);
 };
 
@@ -175,6 +182,10 @@ const currentProjectHeader = () => {
   data-input="delete"class="material-icons">delete_forever</i>`;
 }
 
+const todayHeader = () => {
+  todoHeader.textContent = "Today's Tasks"
+}
+
 /*const currentPriorityHeader = () => {
   console.log("GameSTOONKS");
 } */
@@ -196,7 +207,8 @@ const pageLoader = () => {
     updateByPriority();
  //   currentPriorityHeader();
   } else if(loadProjectDate === true){
-    updateToday()
+    updateToday();
+    todayHeader();
   }
 }
 
@@ -255,7 +267,7 @@ closeForm.addEventListener('click', (e) => {
 lists.addEventListener('click', (e) => {
   const projectIndex = e.target.dataset.project;
   const todoIndex = e.target.dataset.index;
-  const todoParent = e.target.parentElement;
+  const todoParent = e.target.parentElement.parentElement;
   if (e.target.dataset.input === 'delete') {
     myProjects[projectIndex][1].splice(todoIndex, 1);
     pageLoader();
@@ -263,10 +275,12 @@ lists.addEventListener('click', (e) => {
   } else if (e.target.dataset.input === 'submit') {
     myProjects[projectIndex][1][todoIndex].title = todoParent.querySelector('.updatetitle').value;
     myProjects[projectIndex][1][todoIndex].description = todoParent.querySelector('.updatedescription').value;
-    myProjects[projectIndex][1][todoIndex].updateDate = todoParent.querySelector('.updateduedate').value;
+    myProjects[projectIndex][1][todoIndex].dueDate = format(new Date(todoParent.querySelector('.updateduedate').value), 'do MMM yy');
     myProjects[projectIndex][1][todoIndex].priority = todoParent.querySelector('.updatepriority').value;
     pageLoader()
     localSave();
+  } else if (e.target.dataset.input === 'edit'){
+    todoParent.querySelector('.tododiv-input').classList.toggle("tododiv-input__visible");
   }
 });
 

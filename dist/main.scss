@@ -25,9 +25,12 @@ main {
 $header-color: #db4c3f;
 $main-body-color: #faf6e9;
 $side-menu-color: #fafafa;
-$text-color: #202020;
+$sidebar-button-color: #202020;
 $blue-button: rgb(77, 121, 255);
 $red-button:  rgb(230, 0, 0);
+
+
+
 
 nav {
     background-color: $header-color;
@@ -62,7 +65,6 @@ nav {
         border-radius: 5px;
         font-size: 4rem;
         color: #fff;
-
         &:hover{
             background-color: lighten($header-color, 10);
             cursor: pointer;
@@ -97,10 +99,32 @@ nav {
     h3 {
         width: 80%;
         margin: 1rem auto;
-        background-color: navajowhite;
         text-align: center;
         padding: 1rem 0;
         font-size: 1.6rem;
+        position: relative;
+        border-bottom: 1px solid black;
+        transition: transform 0.3s linear;
+        &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+        color: rgba(0, 0, 0, 0.6);
+        }
+    }
+
+    h4{
+        width: 80%;
+        margin: 1rem auto;
+        text-align: center;
+        padding: 1rem 0;
+        font-size: 1.6rem;
+        position: relative;
+    }
+
+    i {
+        position: absolute;
+        font-size: 2rem;
+        right: 1rem;
     }
 
     input {
@@ -118,16 +142,9 @@ nav {
         font-size: 1.5rem;
     }
 
-    #addproject, #alltodo{
-        border: none;
-        padding: 1rem 5rem;
-        display: block;
-        margin: 1rem auto;
-        outline: none;
-        border-radius: 5px;
+    .sidebar-text {
+        background: none;
     }
-
-
     select {
         width: 80%;
         border: none;
@@ -135,10 +152,13 @@ nav {
         outline: none;
         display: block;
         margin: 0 auto;
-        background-color: navajowhite;
+        background-color: $side-menu-color;
         padding: 1rem 0;
         cursor: pointer;
+        font-size: 1.6rem;
+        font-weight: bold;
         text-align: center;
+        text-align-last: center;
     }
 }
 
@@ -157,6 +177,8 @@ section {
     height: 100%;
     transition: all 0.4s ease-out;
     background-color: white;
+    overflow-y: auto;
+    margin-bottom: 1rem;
 }
 
 .modal {
@@ -235,34 +257,62 @@ section {
     max-width: 95rem;
     min-width: 60rem;
     width: 80%;
-    height: 13rem;
-    background-color: green;
+    min-height: 16rem;
     margin: 2rem auto;
     padding: 1rem;
     border-radius: 10px;
-    background-color: darken($main-body-color, 20);
+    background-color: rgba(whitesmoke, 0.8);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 8px rgba(0, 0, 0, 0.3);
     
     .bold {
         font-weight: bold;
     }
 
-    .todo-title {
+    .tododiv-title {
         text-align: center;
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
     .todo-description{
-        font-size: 1.5rem;
+        font-size: 1.6rem;
     }
 
-    .todo-duedate, .todo-priority {
-        font-size: 1.5rem;
-        display: inline;
-        margin-right: 10rem;
-        width: 50%;
+    .tododiv-contents {
+        display: flex;
+        justify-content: center;
+        font-size: 1.6rem;
+        justify-content: space-between;
+        margin: 0.5rem 0;
     }
+    
+    button {
+        padding: 0.5rem 4rem;
+        border-radius: 5px;
+        border: none;
+        font-size: 1.6rem;
+    }
+
+
+
+    .tododiv-input{
+        display: flex;
+        justify-content: space-around;
+        visibility: hidden;
+        input{
+            border: none;
+            border-radius: 5px;
+            text-indent: 5px;
+            padding: 0 1rem;
+            outline: none;
+        }
+    }
+
 }
+
+.tododiv-input__visible {
+    visibility: visible !important;
+}
+
 
 #todoheader {
     font-size: 4rem;
