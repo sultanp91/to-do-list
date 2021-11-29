@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
 }
 
@@ -233,7 +233,8 @@ section {
   font-weight: bold;
 }
 
-.modal input, .modal select {
+.modal input,
+.modal select {
   width: 100%;
   padding: 1rem;
   margin: 0.5rem 0;
@@ -372,28 +373,38 @@ section {
 
 @media screen and (max-width: 400px) {
   .tododiv {
-    max-width: 400px;
-    width: 100%;
-    height: 22rem;
-  }
-  section {
-    margin-left: 0;
-  }
-  .sidebar {
-    position: absolute;
-    z-index: 1000;
+    width: 95%;
+    min-height: 22rem;
   }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 800px) {
   .tododiv {
-    max-width: 700px;
+    max-width: 70rem;
     width: 90%;
-    height: 20rem;
+    min-height: 20rem;
+  }
+  main {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
   .sidebar {
-    position: absolute;
-    z-index: 1000;
+    width: 100%;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    position: relative;
+  }
+  .sidebar-hidden {
+    display: none;
+  }
+  section {
+    margin-left: 0;
   }
 }
 /*# sourceMappingURL=main.css.map */

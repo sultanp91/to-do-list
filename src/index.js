@@ -4,7 +4,7 @@ class ToDo {
   constructor(title, description, dueDate, priority) {
     (this.title = title),
     (this.description = description),
-    (this.dueDate = format(new Date(dueDate), 'Do MMM yy')),
+    (this.dueDate = format(new Date(dueDate), 'do MMM yy')),
     (this.priority = priority),
     (this.completion = false);
   }

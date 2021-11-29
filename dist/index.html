@@ -1,105 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>To Do List</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,100&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,100&display=swap"
+      rel="stylesheet"
+    />
 
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
 
     <script defer type="module" src="./main.js"></script>
-    <link rel="stylesheet" href="./main.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+  <body>
     <nav>
-        <i class="material-icons" id="hamburger" alt="menu">menu</i>
-        <h1>To Do List</h1>
-        <i class="material-icons" id="plussign">add</i>
+      <i class="material-icons" id="hamburger" alt="menu">menu</i>
+      <h1>To Do List</h1>
+      <i class="material-icons" id="plussign">add</i>
     </nav>
 
     <main>
-
-    <div class="sidebar">
+      <div class="sidebar">
         <h2 class="sidebar-header">Project Manager</h2>
         <form id="projectform">
-            <input type="text" placeholder="Enter Project Name"name="name" id="projectname" required>
-            <h3 id="addproject">Add New Project<i class="material-icons">create_new_folder</i></h3>
+          <input
+            type="text"
+            placeholder="Enter Project Name"
+            name="name"
+            id="projectname"
+            required
+          />
+          <h3 id="addproject">
+            Add New Project<i class="material-icons">create_new_folder</i>
+          </h3>
         </form>
 
-        <h3 id="alltodo">Display all tasks<i class="material-icons">fact_check</i></h3>
-        
-        <h3 id="todaystodo">Today's Tasks<i class="material-icons">today</i></h3>
-        <h4 class="sidebar-text">Select Project <i class="material-icons">arrow_downward</i></h4>
-        <select name="chooseproject" id="projects">
-        </select>
+        <h3 id="alltodo">
+          Display all tasks<i class="material-icons">fact_check</i>
+        </h3>
 
-        <h4 class="sidebar-text">Select Priority<i class="material-icons">arrow_downward</i></h4>
+        <h3 id="todaystodo">
+          Today's Tasks<i class="material-icons">today</i>
+        </h3>
+        <h4 class="sidebar-text">
+          Select Project <i class="material-icons">arrow_downward</i>
+        </h4>
+        <select name="chooseproject" id="projects"></select>
+
+        <h4 class="sidebar-text">
+          Select Priority<i class="material-icons">arrow_downward</i>
+        </h4>
         <select name="chooseprojectpriority" id="select-priority">
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
         </select>
+      </div>
 
-    </div>
-    
-    <section class="todocontainer">
+      <section class="todocontainer">
         <div>
-            <h1 id="todoheader"></h1>
+          <h1 id="todoheader"></h1>
         </div>
-        <div id="lists">
+        <div id="lists"></div>
+      </section>
 
-        </div>
-    </section>
-    
-        <div class="modal">
-                            
-            <h3>New ToDo</h3>
-                    
-            <form id="todoform">
+      <div class="modal">
+        <h3>New ToDo</h3>
 
-                <ul>
-                    <li>
-                        <label for="project">Project:</label>
-                    </li>
-                    <li>
-                        <select name="project" id="projectchoice">
-                        <option value="0">Default</option>
-                        </select>
-                    </li>
+        <form id="todoform">
+          <ul>
+            <li>
+              <label for="project">Project:</label>
+            </li>
+            <li>
+              <select name="project" id="projectchoice">
+                <option value="0">Default</option>
+              </select>
+            </li>
 
-                    <li><label for="title">Title:</label></li>
-                    <li> 
-                        <input type="text" placeholder="Title" name="title" id="todotitle">
-                    </li>
-                    <li>
-                        <label for="description">Description: </label>
-                    </li>
-                    <li>
-                        <input type="text" placeholder="Description" name="description" id="tododescription">
-                    </li>
-                    <li><label for="date">Date:</label></li>
-                    <li>
-                        <input type="date" name="date" id="tododate">
-                    </li>
-                    <li><label for="priority">Priority:  </label></li>
-                    <li>
-                        <select name="priority" id="todopriority">
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
-                        </select>
-                    </li>
-                    <li>   
-                        <button id="addtodo">Submit</button>
-                    </li>
-                    <li>
-                        <button id="closeform">Close</button>
-                    </li>
-                </ul>                     
-            </form>
-        </div>
+            <li><label for="title">Title:</label></li>
+            <li>
+              <input
+                type="text"
+                placeholder="Title"
+                name="title"
+                id="todotitle"
+              />
+            </li>
+            <li>
+              <label for="description">Description: </label>
+            </li>
+            <li>
+              <input
+                type="text"
+                placeholder="Description"
+                name="description"
+                id="tododescription"
+              />
+            </li>
+            <li><label for="date">Date:</label></li>
+            <li>
+              <input type="date" name="date" id="tododate" />
+            </li>
+            <li><label for="priority">Priority: </label></li>
+            <li>
+              <select name="priority" id="todopriority">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+              </select>
+            </li>
+            <li>
+              <button id="addtodo">Submit</button>
+            </li>
+            <li>
+              <button id="closeform">Close</button>
+            </li>
+          </ul>
+        </form>
+      </div>
     </main>
-</body>
+  </body>
 </html>

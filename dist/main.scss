@@ -1,366 +1,353 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    font-family: Helvetica;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: Helvetica;
 }
 
 html {
-    font-size: 62.5%;
+  font-size: 62.5%;
 }
 
 body {
-    height: 100vh;
-    overflow: hidden;
+  min-height: 100vh;
+  overflow: hidden;
 }
 
 main {
-    display: flex;
-    height: 100%;
-    position: relative;
-   
+  display: flex;
+  height: 100%;
+  position: relative;
 }
-
 
 $header-color: #db4c3f;
 $main-body-color: #faf6e9;
 $side-menu-color: #fafafa;
 $sidebar-button-color: #202020;
 $blue-button: rgb(77, 121, 255);
-$red-button:  rgb(230, 0, 0);
-
-
-
+$red-button: rgb(230, 0, 0);
 
 nav {
-    background-color: $header-color;
-    display: flex;
-    align-items: center;
-    height: 5rem;
+  background-color: $header-color;
+  display: flex;
+  align-items: center;
+  height: 5rem;
 
-    h1{
-        text-align: center;
-        width: 100%;
-        color: #fff;
-        font-size: 3rem;
+  h1 {
+    text-align: center;
+    width: 100%;
+    color: #fff;
+    font-size: 3rem;
+  }
+
+  #hamburger {
+    margin-left: 2rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 4rem;
+    color: #fff;
+
+    &:hover {
+      background-color: lighten($header-color, 10);
+      cursor: pointer;
     }
+  }
 
-    #hamburger {
-        margin-left: 2rem;
-        padding: 0.5rem;
-        border-radius: 5px;
-        font-size: 4rem;
-        color: #fff;
-
-        &:hover{
-            background-color: lighten($header-color, 10);
-            cursor: pointer;
-        }
-        
+  #plussign {
+    margin-right: 2rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 4rem;
+    color: #fff;
+    &:hover {
+      background-color: lighten($header-color, 10);
+      cursor: pointer;
     }
-
-    #plussign {
-        margin-right: 2rem;
-        padding: 0.5rem;
-        border-radius: 5px;
-        font-size: 4rem;
-        color: #fff;
-        &:hover{
-            background-color: lighten($header-color, 10);
-            cursor: pointer;
-        }
-
-    }
-    
-
+  }
 }
 
 .sidebar {
-    height: 100%;
-    width: 35rem;
+  height: 100%;
+  width: 35rem;
+  background-color: $side-menu-color;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease-out;
+  position: fixed;
+  left: 0;
+
+  .sidebar-header {
+    margin-top: 2rem;
+  }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+  }
+
+  h3 {
+    width: 80%;
+    margin: 1rem auto;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1.6rem;
+    position: relative;
+    border-bottom: 1px solid black;
+    transition: transform 0.3s linear;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.1);
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  h4 {
+    width: 80%;
+    margin: 1rem auto;
+    text-align: center;
+    padding: 1rem 0;
+    font-size: 1.6rem;
+    position: relative;
+  }
+
+  i {
+    position: absolute;
+    font-size: 2rem;
+    right: 1rem;
+  }
+
+  input {
+    margin: 0 auto;
+    display: block;
+    width: 80%;
+  }
+
+  #projectname {
+    border: solid 1px grey;
+    padding: 1.3rem 0;
+    border-radius: 0.5rem;
+    outline: none;
+    text-indent: 5px;
+    font-size: 1.5rem;
+  }
+
+  .sidebar-text {
+    background: none;
+  }
+  select {
+    width: 80%;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    display: block;
+    margin: 0 auto;
     background-color: $side-menu-color;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.4s ease-out;
-    position: fixed;
-    left: 0;
-
-
-    .sidebar-header{
-        margin-top: 2rem;
-    }
-
-    h2 {
-        text-align: center;
-        margin-bottom: 1.5rem;
-        font-size: 2rem;
-    }
-
-    h3 {
-        width: 80%;
-        margin: 1rem auto;
-        text-align: center;
-        padding: 1rem 0;
-        font-size: 1.6rem;
-        position: relative;
-        border-bottom: 1px solid black;
-        transition: transform 0.3s linear;
-        &:hover {
-        cursor: pointer;
-        transform: scale(1.1);
-        color: rgba(0, 0, 0, 0.6);
-        }
-    }
-
-    h4{
-        width: 80%;
-        margin: 1rem auto;
-        text-align: center;
-        padding: 1rem 0;
-        font-size: 1.6rem;
-        position: relative;
-    }
-
-    i {
-        position: absolute;
-        font-size: 2rem;
-        right: 1rem;
-    }
-
-    input {
-        margin: 0 auto;
-        display: block;
-        width: 80%;
-    }
-
-    #projectname {
-        border: solid 1px grey;
-        padding: 1.3rem 0;
-        border-radius: 0.5rem;
-        outline: none;
-        text-indent: 5px;
-        font-size: 1.5rem;
-    }
-
-    .sidebar-text {
-        background: none;
-    }
-    select {
-        width: 80%;
-        border: none;
-        border-radius: 10px;
-        outline: none;
-        display: block;
-        margin: 0 auto;
-        background-color: $side-menu-color;
-        padding: 1rem 0;
-        cursor: pointer;
-        font-size: 1.6rem;
-        font-weight: bold;
-        text-align: center;
-        text-align-last: center;
-    }
+    padding: 1rem 0;
+    cursor: pointer;
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: center;
+    text-align-last: center;
+  }
 }
 
 .sidebar-hidden {
-    left: -35rem;
+  left: -35rem;
 }
 
-
 .todo-adjust {
-    margin-left: 0rem;
+  margin-left: 0rem;
 }
 
 section {
-    margin-left: 35rem;
-    width: 100%;
-    height: 100%;
-    transition: all 0.4s ease-out;
-    background-color: white;
-    overflow-y: auto;
-    padding-bottom: 5rem;
+  margin-left: 35rem;
+  width: 100%;
+  height: 100%;
+  transition: all 0.4s ease-out;
+  background-color: white;
+  overflow-y: auto;
+  padding-bottom: 5rem;
 }
 
 .modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: solid 1px black;
+  border-radius: 1.5rem;
+  background-color: darken($side-menu-color, 5);
+  height: 50rem;
+  width: 35rem;
+  visibility: hidden;
 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    border: solid 1px black;
-    border-radius: 1.5rem;
-    background-color: darken($side-menu-color, 5);
-    height: 50rem;
-    width: 35rem;
-    visibility: hidden;
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    li {
+      display: flex;
+      justify-content: start;
+      align-items: center;
+      padding: 0 2rem;
+    }
+  }
 
-    ul{
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        li {
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            padding: 0 2rem;
-            }
-    }
-    
-    h3 {
-        font-size: 3rem;
-        text-align: center;
-        padding: 1rem 0;
-    }
+  h3 {
+    font-size: 3rem;
+    text-align: center;
+    padding: 1rem 0;
+  }
 
-    label{
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-    input, select{
-        width: 100%;
-        padding: 1rem;
-        margin: 0.5rem 0;
-        border: none;
-        border-radius: 5px;
-        background-color: white;
-    }
+  label {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  input,
+  select {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+  }
 
-    button {
-        padding: 1rem 0;
-        display: inline-block;
-        width: 40rem;
-        border: none;
-        border-radius: 5px;
-        margin-top: 1rem;
-
+  button {
+    padding: 1rem 0;
+    display: inline-block;
+    width: 40rem;
+    border: none;
+    border-radius: 5px;
+    margin-top: 1rem;
+  }
+  #addtodo {
+    background-color: $blue-button;
+    &:hover {
+      background-color: lighten($blue-button, 10);
     }
-    #addtodo {
-        background-color: $blue-button;
-        &:hover {
-            background-color: lighten($blue-button, 10);
-        }
+  }
+  #closeform {
+    background-color: $red-button;
+    &:hover {
+      background-color: lighten($red-button, 10);
     }
-    #closeform {
-        background-color: $red-button;
-        &:hover {
-            background-color: lighten($red-button, 10);
-        }
-    }
-
+  }
 }
 
 .modal-active {
-    visibility: visible;
+  visibility: visible;
 }
 
 .tododiv {
-    max-width: 95rem;
-    width: 80%;
-    min-height: 16rem;
-    margin: 2rem auto;
-    padding: 1rem;
-    border-radius: 10px;
-    background-color: rgba(whitesmoke, 0.8);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 8px rgba(0, 0, 0, 0.3);
-    
-    .bold {
-        font-weight: bold;
+  max-width: 95rem;
+  width: 80%;
+  min-height: 16rem;
+  margin: 2rem auto;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: rgba(whitesmoke, 0.8);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3), 0px 8px 8px rgba(0, 0, 0, 0.3);
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .tododiv-title {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .todo-description {
+    font-size: 1.6rem;
+  }
+
+  .tododiv-contents {
+    display: flex;
+    justify-content: center;
+    font-size: 1.6rem;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  button {
+    padding: 0.5rem 4rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.6rem;
+  }
+
+  .tododiv-input {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    visibility: hidden;
+    input {
+      border: none;
+      border-radius: 5px;
+      text-indent: 5px;
+      padding: 0 1rem;
+      outline: none;
     }
-
-    .tododiv-title {
-        text-align: center;
-        font-size: 2rem;
-    }
-
-    .todo-description{
-        font-size: 1.6rem;
-    }
-
-    .tododiv-contents {
-        display: flex;
-        justify-content: center;
-        font-size: 1.6rem;
-        justify-content: space-between;
-        margin: 0.5rem 0;
-        flex-wrap: wrap;
-    }
-    
-    button {
-        padding: 0.5rem 4rem;
-        border-radius: 5px;
-        border: none;
-        font-size: 1.6rem;
-    }
-
-
-
-    .tododiv-input{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-around;
-        visibility: hidden;
-        input{
-            border: none;
-            border-radius: 5px;
-            text-indent: 5px;
-            padding: 0 1rem;
-            outline: none;
-        }
-    }
-
+  }
 }
 
 .tododiv-input__visible {
-    visibility: visible !important;
+  visibility: visible !important;
 }
 
-
 #todoheader {
+  font-size: 4rem;
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
+  position: relative;
+  i {
     font-size: 4rem;
-    display: flex;
-    margin-top: 1rem;
-    justify-content: center;
-    position: relative;
-    i {
-        font-size: 4rem;
-        position: absolute;
-        top: 0.5rem;
-        right: 2rem;
-        cursor: pointer;
-        &:hover{
-            color: red;
-        }
+    position: absolute;
+    top: 0.5rem;
+    right: 2rem;
+    cursor: pointer;
+    &:hover {
+      color: red;
     }
+  }
 }
 
 #lists {
-    overflow-y: auto;
+  overflow-y: auto;
 }
 
-@media screen and (max-width: 400px){
-    .tododiv {
-        max-width: 400px;
-        width: 100%;
-        height: 22rem;
-    }
-    section{
-        margin-left: 0;
-    }
-    .sidebar {
-        position: absolute;
-        z-index: 1000;
-    }
-
+@media screen and (max-width: 400px) {
+  .tododiv {
+    width: 95%;
+    min-height: 22rem;
+  }
 }
-@media screen and (max-width: 720px){
-    .tododiv {
-        max-width: 700px;
-        width: 90%;
-        height: 20rem;
-    }
-    .sidebar {
-        position: absolute;
-        z-index: 1000;
-    }
-   
+@media screen and (max-width: 720px) {
+}
+
+@media screen and (max-width: 800px) {
+  .tododiv {
+    max-width: 70rem;
+    width: 90%;
+    min-height: 20rem;
+  }
+  main {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+  }
+  .sidebar-hidden {
+    display: none;
+  }
+  section {
+    margin-left: 0;
+  }
 }
