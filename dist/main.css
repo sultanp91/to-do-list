@@ -85,13 +85,11 @@ nav #plussign:hover {
 }
 
 .sidebar .sidebar-header {
-  margin-top: 2rem;
-}
-
-.sidebar h2 {
+  padding: 2rem 0 1.5rem;
   text-align: center;
-  margin-bottom: 1.5rem;
   font-size: 2rem;
+  width: 95%;
+  margin: 0 auto;
 }
 
 .sidebar h3 {
@@ -399,6 +397,9 @@ section {
     -ms-flex-wrap: wrap;
         flex-wrap: wrap;
     position: relative;
+  }
+  .sidebar form {
+    width: 100%;
   }
   .sidebar-hidden {
     display: none;
